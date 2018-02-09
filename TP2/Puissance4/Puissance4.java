@@ -13,10 +13,11 @@ public class Puissance4 {
 	public static void main(String[] args) {
 		// cr�ation des joueurs et appel de la fonction jouer
 		JoueurHumain joueur1 = new JoueurHumain();
-		JoueurAleatoire joueur2 = new JoueurAleatoire();
-		// JoueurHumain joueur2 = new JoueurHumain();
+		// JoueurAleatoire joueur2 = new JoueurAleatoire();
+		JoueurHumain joueur2 = new JoueurHumain();
 
-		jouer(joueur1, joueur2);
+		// jouer(joueur1, joueur2);
+		jouer(joueur2, joueur1);
 	}
 
 	public static String affichageJ(int numJoueur) {
@@ -56,11 +57,15 @@ public class Puissance4 {
 			coup = res.getColonne();
 
 			jeuFini = grille.coupGagnant(numJoueur, coup);
+			if (jeuFini) {
+				vainqueur = numJoueur;
+			}
 			grille.joueEn(numJoueur, coup);
 
-			vainqueur = numJoueur;
 			joueurCour = numJoueur == Grille.JOUEUR1 ? joueur2 : joueur1;
 			numJoueur = Grille.joueurSuivant(numJoueur);
+			if (grille.estPleine())
+				jeuFini = true;
 
 		} // while - boucle de jeu
 
