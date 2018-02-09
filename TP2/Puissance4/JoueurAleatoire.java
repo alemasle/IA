@@ -5,22 +5,25 @@
  */
 
 /**
- * Joueur qui choisit aléatoirement dans quelle colonne de la grille jouer.
+ * Joueur qui choisit alï¿½atoirement dans quelle colonne de la grille jouer.
  * 
  */
-public class JoueurAleatoire implements Joueur{
-	
+public class JoueurAleatoire implements Joueur {
+
 	/**
-	 * Fonction qui indique dans quelle colonne de la grille jouer,
-	 * en choisissant aléatoirement une colonne vide.
-	 * @param grille : la grille de puissance 4.
-	 * @param joueur : le joueur qui doit jouer le coup.
-	 * @return l'indice de la colonne dans laquelle poser le pion 
-	 * ainsi que la valeur associée à la nouvelle grille.
+	 * Fonction qui indique dans quelle colonne de la grille jouer, en
+	 * choisissant alï¿½atoirement une colonne vide.
+	 * 
+	 * @param grille
+	 *            : la grille de puissance 4.
+	 * @param joueur
+	 *            : le joueur qui doit jouer le coup.
+	 * @return l'indice de la colonne dans laquelle poser le pion ainsi que la
+	 *         valeur associï¿½e ï¿½ la nouvelle grille.
 	 */
-	public Resultat coup(Grille grille, int joueur){
+	public Resultat coup(Grille grille, int joueur) {
 		int col = grille.getCoupAleatoire();
-		
+
 		return new Resultat(col, 0);
 	}
 

@@ -5,8 +5,8 @@
  */
 
 /**
- * Résultat composé de la valeur de la grille 
- * si on joue dans la colonne donnée.
+ * Rï¿½sultat composï¿½ de la valeur de la grille 
+ * si on joue dans la colonne donnï¿½e.
  * 
  */
 public class Resultat{

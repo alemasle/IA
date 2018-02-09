@@ -11,55 +11,72 @@
 public class Puissance4 {
 
 	public static void main(String[] args) {
-		//création des joueurs et appel de la fonction jouer
+		// crï¿½ation des joueurs et appel de la fonction jouer
 		JoueurHumain joueur1 = new JoueurHumain();
 		JoueurAleatoire joueur2 = new JoueurAleatoire();
-		
+		// JoueurHumain joueur2 = new JoueurHumain();
+
 		jouer(joueur1, joueur2);
 	}
-	
-	
+
+	public static String affichageJ(int numJoueur) {
+		return numJoueur == Grille.JOUEUR1 ? "1" : "2";
+	}
+
 	/**
 	 * Fonction qui effectue la boucle de jeu.
 	 * 
-	 * @param joueur1 : le premier joueur.
-	 * @param joueur2 : le second joueur.
+	 * @param joueur1
+	 *            : le premier joueur.
+	 * @param joueur2
+	 *            : le second joueur.
 	 */
-	public static void jouer(Joueur joueur1, Joueur joueur2){
+	public static void jouer(Joueur joueur1, Joueur joueur2) {
 		Resultat res;
-		int coup;
+		int coup = -1;
 		Grille grille = new Grille();
-		
-		Joueur joueurCour = joueur1;	
-		int numJoueur = Grille.JOUEUR1; //le joueur 1 commence à jouer
-		
-		int vainqueur = 0;//match nul
+
+		Joueur joueurCour = joueur1;
+		int numJoueur = Grille.JOUEUR1; // le joueur 1 commence ï¿½ jouer
+
+		int vainqueur = 0;// match nul
 		boolean jeuFini = false;
-		
-		
-		//boucle de jeu
-		while(!jeuFini){
-			//affichage de la grille 
+
+		// boucle de jeu
+		while (!jeuFini) {
+			// affichage de la grille
 			System.out.println(grille);
-			
-			//faire jouer le joueur courant et passer au suivant
-			//TODO...
-		}//while - boucle de jeu
-		
-		//affichage de la grille 
+
+			if (coup != -1) {
+				System.out.println("Joueur " + affichageJ(numJoueur) + " a joue en colonne: " + coup);
+			}
+
+			System.out.println("Au tour de Joueur " + affichageJ(numJoueur) + " joue.");
+			res = joueurCour.coup(grille, numJoueur);
+			coup = res.getColonne();
+
+			jeuFini = grille.coupGagnant(numJoueur, coup);
+			grille.joueEn(numJoueur, coup);
+
+			vainqueur = numJoueur;
+			joueurCour = numJoueur == Grille.JOUEUR1 ? joueur2 : joueur1;
+			numJoueur = Grille.joueurSuivant(numJoueur);
+
+		} // while - boucle de jeu
+
+		// affichage de la grille
 		System.out.println(grille);
-		
-		
-		//affichage du vainqueur
-		switch(vainqueur){
-			case Grille.JOUEUR1:
-				System.out.println("Victoire du joueur 1");
-				break;
-			case Grille.JOUEUR2:
-				System.out.println("Victoire du joueur 2");
-				break;
-			default:
-				System.out.println("Match nul");
+
+		// affichage du vainqueur
+		switch (vainqueur) {
+		case Grille.JOUEUR1:
+			System.out.println("Victoire du joueur 1");
+			break;
+		case Grille.JOUEUR2:
+			System.out.println("Victoire du joueur 2");
+			break;
+		default:
+			System.out.println("Match nul");
 		}
 	}
 
