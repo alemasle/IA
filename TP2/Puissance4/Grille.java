@@ -14,9 +14,9 @@ public class Grille {
 	public static final int JOUEUR2 = 1;
 	private static final Random RANDOM = new Random();
 
-	private int[][] _grille; // la grille repr�sentant le jeu
-	private int[] _libre; // la 1�re colonne libre de chaque ligne
-	private int _nbCoups; // le nombre de coups jou�s
+	private int[][] _grille; // la grille representant le jeu
+	private int[] _libre; // la 1ere colonne libre de chaque ligne
+	private int _nbCoups; // le nombre de coups joues
 
 	/**
 	 * Constructeur.
@@ -32,7 +32,7 @@ public class Grille {
 	 * Constructeur par recopie.
 	 * 
 	 * @param g
-	 *            : le grille � recopier.
+	 *            : le grille a recopier.
 	 */
 	public Grille(Grille g) {
 		Grille tmp = g.copie();
@@ -76,20 +76,20 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne l'indice de la 1�re ligne vide de la colonne c.
+	 * Fonction qui donne l'indice de la 1ere ligne vide de la colonne c.
 	 * 
 	 * @param c
 	 *            : l'indice de la colonne.
-	 * @return l'indice de la 1�re ligne vide la colonne c.
+	 * @return l'indice de la 1ere ligne vide la colonne c.
 	 */
 	public int getLigneLibre(int c) {
 		return _libre[c];
 	}
 
 	/**
-	 * Fonction qui donne le nombre de coups jou�s.
+	 * Fonction qui donne le nombre de coups joues.
 	 * 
-	 * @return le nombre de coups jou�s.
+	 * @return le nombre de coups joues.
 	 */
 	public int getNbCoups() {
 		return _nbCoups;
@@ -105,16 +105,16 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne le nombre de cases cons�cutives occup�es par joueur
-	 * dans la 1�re diagonale, � partir de la case (l,c).
+	 * Fonction qui donne le nombre de cases consecutives occupees par joueur dans
+	 * la 1ere diagonale, a partir de la case (l,c).
 	 * 
 	 * @param joueur
-	 *            : le joueur consid�r�.
+	 *            : le joueur considere.
 	 * @param l
 	 *            : l'indice de la ligne.
 	 * @param c
 	 *            : l'indice de la colonne.
-	 * @return le nombre de cases cons�cutives dans la 1�re diagonale.
+	 * @return le nombre de cases consecutives dans la 1ere diagonale.
 	 */
 	public int getNbCasesDiagonale1(int joueur, int l, int c) {
 		int nb = 0;
@@ -143,16 +143,16 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne le nombre de cases cons�cutives occup�es par joueur
-	 * dans la 2�me diagonale, � partir de la case (l,c).
+	 * Fonction qui donne le nombre de cases consecutives occupees par joueur dans
+	 * la 2eme diagonale, a partir de la case (l,c).
 	 * 
 	 * @param joueur
-	 *            : le joueur consid�r�.
+	 *            : le joueur considere.
 	 * @param l
 	 *            : l'indice de la ligne.
 	 * @param c
 	 *            : l'indice de la colonne.
-	 * @return le nombre de cases cons�cutives dans la 2�me diagonale.
+	 * @return le nombre de cases consecutives dans la 2eme diagonale.
 	 */
 	public int getNbCasesDiagonale2(int joueur, int l, int c) {
 		int nb = 0;
@@ -181,16 +181,16 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne le nombre de cases cons�cutives occup�es par joueur
-	 * horizontalement, � partir de la case (l,c).
+	 * Fonction qui donne le nombre de cases consecutives occupees par joueur
+	 * horizontalement, a partir de la case (l,c).
 	 * 
 	 * @param joueur
-	 *            : le joueur consid�r�.
+	 *            : le joueur considere.
 	 * @param l
 	 *            : l'indice de la ligne.
 	 * @param c
 	 *            : l'indice de la colonne.
-	 * @return le nombre de cases cons�cutives horizontalement.
+	 * @return le nombre de cases consecutives horizontalement.
 	 */
 	public int getNbCasesHorizontale(int joueur, int l, int c) {
 		int nb = 0;
@@ -219,16 +219,16 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne le nombre de cases cons�cutives occup�es par joueur
-	 * verticalement, � partir de la case (l,c).
+	 * Fonction qui donne le nombre de cases consecutives occupees par joueur
+	 * verticalement, a partir de la case (l,c).
 	 * 
 	 * @param joueur
-	 *            : le joueur consid�r�.
+	 *            : le joueur considere.
 	 * @param l
 	 *            : l'indice de la ligne.
 	 * @param c
 	 *            : l'indice de la colonne.
-	 * @return le nombre de cases cons�cutives verticalement.
+	 * @return le nombre de cases consecutives verticalement.
 	 */
 	public int getNbCasesVerticale(int joueur, int l, int c) {
 		int nb = 0;
@@ -249,9 +249,9 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne les indices des colonnes dans lesquelles on peut
-	 * jouer. NOTE : il peut �tre int�ressant de changer l'ordre de g�n�ration
-	 * des colonnes...
+	 * Fonction qui donne les indices des colonnes dans lesquelles on peut jouer.
+	 * NOTE : il peut etre interessant de changer l'ordre de generation des
+	 * colonnes...
 	 * 
 	 * @return les indices des colonnes dans lesquelles on peut jouer.
 	 */
@@ -274,8 +274,8 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui donne un indice de colonne dans laquelle on peut jouer, en
-	 * en choisissant un al�atoirement parmi les indices possibles.
+	 * Fonction qui donne un indice de colonne dans laquelle on peut jouer, en en
+	 * choisissant un aleatoirement parmi les indices possibles.
 	 * 
 	 * @return un indice de colonne dans lequel on peut jouer.
 	 */
@@ -303,11 +303,10 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction qui modifie la grille, apr�s que joueur ait jou� dans la colonne
-	 * c.
+	 * Fonction qui modifie la grille, apres que joueur ait joue dans la colonne c.
 	 * 
 	 * @param joueur
-	 *            : le num�ro du joueur.
+	 *            : le numero du joueur.
 	 * @param c
 	 *            : l'indice de la colonne.
 	 * @return vrai si joueur peut jouer dans la colonne c.
@@ -328,7 +327,7 @@ public class Grille {
 	 * Fonction qui indique si le joueur gagne en jouant dans la colonne c.
 	 * 
 	 * @param joueur
-	 *            : le num�ro du joueur.
+	 *            : le numero du joueur.
 	 * @param c
 	 *            : l'indice de la colonne.
 	 * @return vrai si joueur gagne en jouant dans la colonne c.
@@ -345,11 +344,11 @@ public class Grille {
 	}
 
 	/**
-	 * Fonction statique qui donne le num�ro du joueur suivant.
+	 * Fonction statique qui donne le numero du joueur suivant.
 	 * 
 	 * @param joueur
-	 *            : le num�ro du joueur courant.
-	 * @return le num�ro du joueur suivant.
+	 *            : le numero du joueur courant.
+	 * @return le numero du joueur suivant.
 	 */
 	public static int joueurSuivant(int joueur) {
 		int advers;
@@ -368,7 +367,7 @@ public class Grille {
 	/**
 	 * Fonction pour l'affichage d'une grille.
 	 * 
-	 * @return la cha�ne correspondant � la grille.
+	 * @return la chaine correspondant a la grille.
 	 */
 	public String toString() {
 		String res = "";

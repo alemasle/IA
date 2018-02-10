@@ -11,15 +11,15 @@
 public class JoueurHumain implements Joueur {
 
 	/**
-	 * Fonction qui indique dans quelle colonne de la grille jouer, en demandant
-	 * au joueur d'entrer un indice valide.
+	 * Fonction qui indique dans quelle colonne de la grille jouer, en demandant au
+	 * joueur d'entrer un indice valide.
 	 * 
 	 * @param grille
 	 *            : la grille de puissance 4.
 	 * @param joueur
 	 *            : le joueur qui doit jouer le coup.
 	 * @return l'indice de la colonne dans laquelle poser le pion ainsi que la
-	 *         valeur associ�e � la nouvelle grille.
+	 *         valeur associee a la nouvelle grille.
 	 */
 	public Resultat coup(Grille grille, int joueur) {
 		System.out.println("Entrez un numero de colonne valide");

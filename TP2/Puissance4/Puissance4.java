@@ -11,13 +11,13 @@
 public class Puissance4 {
 
 	public static void main(String[] args) {
-		// cr�ation des joueurs et appel de la fonction jouer
+		// creation des joueurs et appel de la fonction jouer
 		JoueurHumain joueur1 = new JoueurHumain();
-		// JoueurAleatoire joueur2 = new JoueurAleatoire();
-		JoueurHumain joueur2 = new JoueurHumain();
+		JoueurAleatoire joueur2 = new JoueurAleatoire();
+		// JoueurHumain joueur2 = new JoueurHumain();
 
-		// jouer(joueur1, joueur2);
-		jouer(joueur2, joueur1);
+		jouer(joueur1, joueur2); // Joueur 1 commence avant
+		// jouer(joueur2, joueur1); // Joueur 2 commence avant
 	}
 
 	public static String affichageJ(int numJoueur) {
@@ -38,7 +38,7 @@ public class Puissance4 {
 		Grille grille = new Grille();
 
 		Joueur joueurCour = joueur1;
-		int numJoueur = Grille.JOUEUR1; // le joueur 1 commence � jouer
+		int numJoueur = Grille.JOUEUR1; // le joueur 1 commence a jouer
 
 		int vainqueur = 0;// match nul
 		boolean jeuFini = false;
@@ -49,7 +49,7 @@ public class Puissance4 {
 			System.out.println(grille);
 
 			if (coup != -1) {
-				System.out.println("Joueur " + affichageJ(numJoueur) + " a joue en colonne: " + coup);
+				System.out.println("Joueur " + affichageJ(numJoueur) + " a joue en colonne: " + coup + "\n");
 			}
 
 			System.out.println("Au tour de Joueur " + affichageJ(numJoueur) + " joue.");

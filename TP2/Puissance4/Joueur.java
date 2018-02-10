@@ -5,7 +5,7 @@
  */
 
 /**
- * Interface d'un joueur pour choisir le coup � jouer, dans une grille.
+ * Interface d'un joueur pour choisir le coup a jouer, dans une grille.
  * 
  */
 public interface Joueur {
@@ -18,7 +18,7 @@ public interface Joueur {
 	 * @param joueur
 	 *            : le joueur qui doit jouer le coup.
 	 * @return l'indice de la colonne dans laquelle poser le pion ainsi que la
-	 *         valeur associ�e � la nouvelle grille.
+	 *         valeur associee a la nouvelle grille.
 	 */
 	public Resultat coup(Grille grille, int joueur);
 }
