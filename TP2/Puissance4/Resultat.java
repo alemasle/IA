@@ -5,8 +5,7 @@
  */
 
 /**
- * R�sultat compos� de la valeur de la grille si on joue dans la colonne
- * donn�e.
+ * Resultat compose de la valeur de la grille si on joue dans la colonne donnee.
  * 
  */
 public class Resultat {

@@ -13,11 +13,11 @@ public class Puissance4 {
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
 		JoueurHumain joueur1 = new JoueurHumain();
-		JoueurAleatoire joueur2 = new JoueurAleatoire();
+		// JoueurAleatoire joueur2 = new JoueurAleatoire();
+		JoueurMiniMax joueur2 = new JoueurMiniMax();
 		// JoueurHumain joueur2 = new JoueurHumain();
 
 		jouer(joueur1, joueur2); // Joueur 1 commence avant
-		// jouer(joueur2, joueur1); // Joueur 2 commence avant
 	}
 
 	public static String affichageJ(int numJoueur) {
