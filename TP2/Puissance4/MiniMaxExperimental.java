@@ -29,7 +29,7 @@ public class MiniMaxExperimental {
 	 * 
 	 * @param grille
 	 * @param depth
-	 * @return m l'evaluation de la grille optimale pour une profondeur depth. 
+	 * @return m l'evaluation de la grille optimale pour une profondeur depth.
 	 */
 	private double maxiMin(Grille grille, int depth) {
 		double m = -10000;
@@ -50,7 +50,7 @@ public class MiniMaxExperimental {
 			if (g.coupGagnant(joueur, cp)) {
 				coup = cp;
 				suivant = pred[i];
-				return 1000000; // Grille gagnante pour joueur 1
+				return FonctionEvaluationProf.MAX; // Grille gagnante pour joueur 1
 			}
 			g.joueEn(-joueur, coupPossible[i]);
 			pred[i] = g;
@@ -80,16 +80,16 @@ public class MiniMaxExperimental {
 		Grille pred[] = new Grille[cpLen];
 
 		if (depth == 0 || grille.estPleine() || cpLen == 0) { // si FEUILLE(R) alors alpha <- h(R)
-			double ev = eval.evaluation(grille, joueur);
-			System.out.println("eval: " + ev + " depth = " + depth);
-			return ev;
+			m = eval.evaluation(grille, joueur);
+			System.out.println("eval: " + m + " depth = " + depth);
+			return m;
 		}
 
 		for (int i = 0; i < cpLen; i++) { // maximum des evaluations des sous-arbres
 			Grille g = new Grille(grille);
 			int cp = coupPossible[i];
 			if (g.coupGagnant(joueur, cp)) {
-				return -1000000; // Grille gagnante pour joueur 2
+				return FonctionEvaluationProf.MIN; // Grille gagnante pour joueur 2
 			}
 			g.joueEn(joueur, cp);
 			pred[i] = g;
