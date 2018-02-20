@@ -10,7 +10,7 @@ public class MiniMaxExperimental {
 
 	private int joueur;
 
-	private Grille suivant;
+//	private Grille suivant;
 
 	private int coup;
 
@@ -32,7 +32,7 @@ public class MiniMaxExperimental {
 	 * @return m l'evaluation de la grille optimale pour une profondeur depth.
 	 */
 	private double maxiMin(Grille grille, int depth) {
-		double m = -10000;
+		double m = FonctionEvaluationProf.MIN;
 		int coupPossible[] = grille.generateurCoups();
 		int cpLen = coupPossible.length;
 		FonctionEvaluationProf eval = new FonctionEvaluationProf();
@@ -49,7 +49,7 @@ public class MiniMaxExperimental {
 			int cp = coupPossible[i];
 			if (g.coupGagnant(joueur, cp)) {
 				coup = cp;
-				suivant = pred[i];
+//				suivant = pred[i];
 				return FonctionEvaluationProf.MAX; // Grille gagnante pour joueur 1
 			}
 			g.joueEn(-joueur, coupPossible[i]);
@@ -59,7 +59,7 @@ public class MiniMaxExperimental {
 				m = tmp;
 				coup = coupPossible[i];
 				System.out.println("coup: " + coup);
-				suivant = pred[i];
+//				suivant = pred[i];
 			}
 		}
 		return m; // beta <- min (maximin (succ(R)), maximin (succ(R)), ..., maximin(succ(R)) )
@@ -73,7 +73,7 @@ public class MiniMaxExperimental {
 	 * @return
 	 */
 	private double miniMax(Grille grille, int depth) {
-		double m = 10000;
+		double m = FonctionEvaluationProf.MAX;
 		int coupPossible[] = grille.generateurCoups();
 		int cpLen = coupPossible.length;
 		FonctionEvaluationProf eval = new FonctionEvaluationProf();
