@@ -88,7 +88,7 @@ public class MiniMaxExperimental {
 		for (int i = 0; i < cpLen; i++) { // maximum des evaluations des sous-arbres
 			Grille g = new Grille(grille);
 			int cp = coupPossible[i];
-			if (g.coupGagnant(joueur, cp)) {
+			if (g.coupGagnant(-joueur, cp)) {
 				return FonctionEvaluationProf.MIN; // Grille gagnante pour joueur 2
 			}
 			g.joueEn(joueur, cp);
