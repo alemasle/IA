@@ -53,7 +53,7 @@ public class MiniMaxExperimental {
 				return m; // Grille gagnante pour joueur 1
 			}
 
-			g.joueEn(joueur, cp);
+ 			g.joueEn(joueur, cp);
 			double tmp = Math.max(m, miniMax(g, depth - 1)); // On compare le maximum avec la nouvelle valeur qui
 																// remonte
 			pred[i] = g;
@@ -112,7 +112,7 @@ public class MiniMaxExperimental {
 	 * Permet de recuperer la grille comprenant le meileur coup deja joue.
 	 * 
 	 * @param grille
-	 * @param joueur
+	 * @param depth
 	 * @return la grille avec le meilleur coup possible joue.
 	 */
 	public int getBestCoup(Grille grille, int depth) {
