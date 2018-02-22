@@ -49,7 +49,7 @@ public class Puissance4 {
 			System.out.println(grille);
 
 			if (coup != -1) {
-				System.out.println("Joueur " + affichageJ(numJoueur) + " a joue en colonne: " + coup + "\n");
+				System.out.println("Joueur " + affichageJ(-numJoueur) + " a joue en colonne: " + coup + "\n");
 			}
 
 			System.out.println("Au tour de Joueur " + affichageJ(numJoueur) + " joue.");

@@ -22,7 +22,7 @@ public class JoueurMiniMax implements Joueur {
 		FonctionEvaluationProf eval = new FonctionEvaluationProf();
 		System.out.println("eval basique: " + eval.evaluation(grille, joueur));
 		MiniMaxExperimental mmE = new MiniMaxExperimental(joueur);
-		int depth = 1;
+		int depth = 3;
 		int col = mmE.getBestCoup(grille, depth);
 		return new Resultat(col, 0);
 	}
