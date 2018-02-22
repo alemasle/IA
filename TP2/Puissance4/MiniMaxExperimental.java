@@ -10,7 +10,7 @@ public class MiniMaxExperimental {
 
 	private int joueur;
 
-//	private Grille suivant;
+	private Grille suivant;
 
 	private int coup;
 
@@ -40,26 +40,28 @@ public class MiniMaxExperimental {
 
 		if (cpLen == 0 || depth == 0 || grille.estPleine()) { // si FEUILLE(R) alors alpha <- h(R)
 			m = eval.evaluation(grille, joueur);
-			System.out.println("eval: " + m + " depth = " + depth);
+			System.out.println("EvalMaxi grille pleine " + m + ", depth = " + depth);
 			return m;
 		}
 
 		for (int i = 0; i < cpLen; i++) { // maximum des evaluations des sous-arbres
 			Grille g = new Grille(grille);
 			int cp = coupPossible[i];
+
 			if (g.coupGagnant(joueur, cp)) {
-				coup = cp;
-//				suivant = pred[i];
-				return FonctionEvaluationProf.MAX; // Grille gagnante pour joueur 1
+				m = eval.evaluation(grille, joueur);
+				return m; // Grille gagnante pour joueur 1
 			}
-			g.joueEn(-joueur, coupPossible[i]);
+
+			g.joueEn(joueur, cp);
+			double tmp = Math.max(m, miniMax(g, depth - 1)); // On compare le maximum avec la nouvelle valeur qui
+																// remonte
 			pred[i] = g;
-			double tmp = Math.max(m, miniMax(pred[i], depth - 1));
+
 			if (tmp < m) {
 				m = tmp;
 				coup = coupPossible[i];
-				System.out.println("coup: " + coup);
-//				suivant = pred[i];
+				suivant = pred[i];
 			}
 		}
 		return m; // beta <- min (maximin (succ(R)), maximin (succ(R)), ..., maximin(succ(R)) )
@@ -81,20 +83,24 @@ public class MiniMaxExperimental {
 
 		if (depth == 0 || grille.estPleine() || cpLen == 0) { // si FEUILLE(R) alors alpha <- h(R)
 			m = eval.evaluation(grille, joueur);
-			System.out.println("eval: " + m + " depth = " + depth);
+			System.out.println("EvalMini grille pleine " + m + ", depth = " + depth);
 			return m;
 		}
 
 		for (int i = 0; i < cpLen; i++) { // maximum des evaluations des sous-arbres
 			Grille g = new Grille(grille);
 			int cp = coupPossible[i];
+
 			if (g.coupGagnant(-joueur, cp)) {
-				return FonctionEvaluationProf.MIN; // Grille gagnante pour joueur 2
+				m = eval.evaluation(grille, joueur);
+				return m; // Grille gagnante pour joueur 2
 			}
-			g.joueEn(joueur, cp);
+
+			g.joueEn(-joueur, cp);
+			double tmp = Math.min(m, maxiMin(g, depth - 1)); // On compare le maximum avec la nouvelle valeur qui
+																// remonte
 			pred[i] = g;
-			double tmp = Math.min(m, maxiMin(pred[i], depth - 1));
-			System.out.println("m=" + m + " tmp=" + tmp);
+
 			if (tmp > m) {
 				m = tmp;
 			}

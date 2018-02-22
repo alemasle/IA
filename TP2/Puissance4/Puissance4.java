@@ -63,7 +63,7 @@ public class Puissance4 {
 			grille.joueEn(numJoueur, coup);
 
 			joueurCour = numJoueur == Grille.JOUEUR1 ? joueur2 : joueur1;
-			numJoueur = Grille.joueurSuivant(numJoueur);
+			numJoueur = -numJoueur;
 			if (grille.estPleine())
 				jeuFini = true;
 
