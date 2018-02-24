@@ -6,8 +6,8 @@
  *
  */
 public class JoueurMiniMax implements Joueur {
-	
-	public static final int DEPTH = 3;
+
+	public static final int DEPTH = 7;
 
 	/**
 	 * Fonction qui indique dans quelle colonne de la grille jouer, en choisissant
@@ -22,7 +22,7 @@ public class JoueurMiniMax implements Joueur {
 	 */
 	public Resultat coup(Grille grille, int joueur) {
 		FonctionEvaluationProf eval = new FonctionEvaluationProf();
-		MiniMaxExperimental mmE = new MiniMaxExperimental(joueur);
+		MiniMaxV2 mmE = new MiniMaxV2(joueur);
 		int col = mmE.getBestCoup(grille, DEPTH);
 		return new Resultat(col, eval.evaluation(grille, joueur));
 	}

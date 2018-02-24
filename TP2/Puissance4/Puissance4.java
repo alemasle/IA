@@ -13,6 +13,7 @@ public class Puissance4 {
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
 		JoueurHumain joueur1 = new JoueurHumain();
+
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
 		JoueurMiniMax joueur2 = new JoueurMiniMax();
 		// JoueurHumain joueur2 = new JoueurHumain();
@@ -57,9 +58,11 @@ public class Puissance4 {
 			coup = res.getColonne();
 
 			jeuFini = grille.coupGagnant(numJoueur, coup);
+
 			if (jeuFini) {
 				vainqueur = numJoueur;
 			}
+
 			grille.joueEn(numJoueur, coup);
 
 			joueurCour = numJoueur == Grille.JOUEUR1 ? joueur2 : joueur1;
