@@ -36,15 +36,17 @@ public class MiniMaxV2 {
 		TreeMap<Double, Integer> map = new TreeMap<>();
 		double tmp = 0;
 		int coups[] = g.generateurCoups();
-		int len = coups.length;
 
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < coups.length; i++) {
 			Grille grille = new Grille(g);
 			grille.joueEn(joueur, coups[i]);
 			tmp = miniMax(grille, depth - 1);
-			map.put(tmp, coups[i]);
-		}
 
+			if (!map.containsKey(tmp)) {
+				map.put(tmp, coups[i]);
+			}
+
+		}
 		System.out.println("treemap : " + map.toString() + "");
 		return map.get(map.lastKey());
 	}
@@ -80,6 +82,12 @@ public class MiniMaxV2 {
 			depth--;
 
 			for (int i = 0; i < len; i++) { // Pour chacun des coups possible on prend le max
+
+				if (grille.coupGagnant(joueur, coups[i])) {
+					System.out.println("Victoire Joueur 1 pour le coup : " + coups[i] + " a la profondeur " + depth);
+					return FonctionEvaluationProf.MAX;
+				}
+
 				grille.joueEn(joueur, coups[i]);
 				m = Math.max(m, miniMax(grille, depth));
 			}
@@ -87,7 +95,7 @@ public class MiniMaxV2 {
 		} else {
 			m = tmp;
 		}
-		System.out.println("maxiMin m fin : " + m);
+		// System.out.println("maxiMin m fin : " + m);
 		return m;
 
 	}
@@ -123,6 +131,12 @@ public class MiniMaxV2 {
 			depth--;
 
 			for (int i = 0; i < len; i++) { // Pour chacun des coups possible on prend le min
+
+				if (grille.coupGagnant(-joueur, coups[i])) {
+					System.out.println("Victoire Joueur 2 pour le coup : " + coups[i] + " a la profondeur " + depth);
+					return FonctionEvaluationProf.MIN;
+				}
+
 				grille.joueEn(-joueur, coups[i]);
 				m = Math.min(m, maxiMin(grille, depth));
 			}
@@ -130,7 +144,7 @@ public class MiniMaxV2 {
 		} else {
 			m = tmp;
 		}
-		System.out.println("MiniMax m fin : " + m);
+		// System.out.println("MiniMax m fin : " + m);
 		return m;
 
 	}
