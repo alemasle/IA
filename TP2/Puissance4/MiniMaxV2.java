@@ -97,7 +97,7 @@ public class MiniMaxV2 {
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
 		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
-			Grille grille = new Grille(g);
+			Grille grille = g.copie();
 			depth--;
 
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le max
@@ -138,7 +138,7 @@ public class MiniMaxV2 {
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
 		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
-			Grille grille = new Grille(g);
+			Grille grille = g.copie();
 			depth--;
 
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le min

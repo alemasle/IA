@@ -55,6 +55,7 @@ public class Puissance4 {
 
 			System.out.println("Au tour de Joueur " + affichageJ(numJoueur) + " joue.");
 			res = joueurCour.coup(grille, numJoueur);
+
 			coup = res.getColonne();
 
 			jeuFini = grille.coupGagnant(numJoueur, coup);
