@@ -29,6 +29,16 @@ public class MiniMaxV2 {
 	}
 
 	/**
+	 * Permet de transformer le joueur en numero de joueur joueur -1 est joueur 1;
+	 * joueur 1 est joueur 2
+	 * 
+	 * @return le numero du joueur
+	 */
+	private String getJoueur() {
+		return joueur == -1 ? "1" : "2";
+	}
+
+	/**
 	 * 
 	 * @param g
 	 *            la grille initiale
@@ -43,16 +53,29 @@ public class MiniMaxV2 {
 		int coups[] = g.generateurCoups();
 
 		for (int i = 0; i < coups.length; i++) {
-
 			Grille grille = new Grille(g);
-			grille.joueEn(joueur, coups[i]);
-			tmp = miniMax(grille, depth - 1);
 
-			map.put(coups[i], tmp);
+			if (grille.peutJouerEn(coups[i])) {
 
+				if (g.coupGagnant(joueur, coups[i]) || g.coupGagnant(-joueur, coups[i])) {
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("Joueur " + getJoueur() + " dit : Je gagne en colonne " + coups[i]
+							+ " ! Il Fallait etre plus attentif!");
+					return coups[i];
+				}
+
+				else {
+					grille.joueEn(joueur, coups[i]);
+					tmp = miniMax(grille, depth - 1);
+					map.put(coups[i], tmp);
+				}
+
+			}
 		}
 		System.out.println("treemap : " + map.toString() + "");
-		// return map.get(map.lastKey());
 		return bestCol(map);
 	}
 
@@ -103,7 +126,6 @@ public class MiniMaxV2 {
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le max
 
 				if (grille.coupGagnant(joueur, coups[i])) {
-					System.out.println("Victoire Joueur 1 pour le coup : " + coups[i] + " a la profondeur " + depth);
 					return FonctionEvaluationProf.MAX;
 				}
 
@@ -114,7 +136,6 @@ public class MiniMaxV2 {
 		} else {
 			m = eval.evaluation(g, J1);
 		}
-		System.out.println("MaxiMin m fin : " + m);
 		return m;
 
 	}
@@ -144,7 +165,6 @@ public class MiniMaxV2 {
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le min
 
 				if (grille.coupGagnant(-joueur, coups[i])) {
-					System.out.println("Victoire Joueur 2 pour le coup : " + coups[i] + " a la profondeur " + depth);
 					return FonctionEvaluationProf.MIN;
 				}
 
@@ -155,7 +175,6 @@ public class MiniMaxV2 {
 		} else {
 			m = eval.evaluation(g, J1); // Profondeur atteinte
 		}
-		System.out.println("MiniMax m fin : " + m);
 		return m;
 
 	}

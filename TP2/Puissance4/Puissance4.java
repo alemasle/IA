@@ -10,15 +10,27 @@
  */
 public class Puissance4 {
 
+	private static int IA;
+
+	private static int IA2;
+
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
-		JoueurHumain joueur1 = new JoueurHumain();
-
+		Joueur joueur1 = new JoueurHumain();
+		Joueur joueur2 = new JoueurMiniMax();
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
-		JoueurAlphaBeta joueur2 = new JoueurAlphaBeta();
+		// JoueurAlphaBeta joueur2 = new JoueurAlphaBeta();
 		// JoueurHumain joueur2 = new JoueurHumain();
 
-		jouer(joueur1, joueur2); // Joueur 1 commence avant
+		IA = (joueur1 instanceof JoueurMiniMax || joueur1 instanceof JoueurAlphaBeta) ? -1 : 1;
+
+		if (IA == -1 && (joueur2 instanceof JoueurMiniMax || joueur2 instanceof JoueurAlphaBeta)) { // Cas ou deux IA se
+																									// battent l'une
+																									// contre l'autre
+			IA2 = 1;
+		}
+
+		jouer(joueur2, joueur1); // Joueur 1 commence avant
 	}
 
 	public static String affichageJ(int numJoueur) {
@@ -37,6 +49,7 @@ public class Puissance4 {
 		Resultat res;
 		int coup = -1;
 		Grille grille = new Grille();
+		int cptTour = 0; // Compte le nombre de tours
 
 		Joueur joueurCour = joueur1;
 		int numJoueur = Grille.JOUEUR1; // le joueur 1 commence a jouer
@@ -71,10 +84,13 @@ public class Puissance4 {
 			if (grille.estPleine())
 				jeuFini = true;
 
+			cptTour++;
+
 		} // while - boucle de jeu
 
 		// affichage de la grille
 		System.out.println(grille);
+		System.out.println("");
 
 		// affichage du vainqueur
 		switch (vainqueur) {
@@ -83,9 +99,23 @@ public class Puissance4 {
 			break;
 		case Grille.JOUEUR2:
 			System.out.println("Victoire du joueur 2");
+
 			break;
 		default:
 			System.out.println("Match nul");
+		}
+
+		if (IA == vainqueur || IA2 == vainqueur) {
+			if (cptTour <= 5) {
+				System.out.println("Joueur " + affichageJ(vainqueur)
+						+ " dit : Je t'ai battu vraiment vite, concentre toi la prochaine fois");
+			} else if (cptTour >= 10) {
+				System.out.println("Joueur " + affichageJ(vainqueur)
+						+ "dit : Tu t'es bien defendu mais j'ai ete meilleur, mais tu peux toujours reesayer!");
+			} else {
+				System.out.println("Joueur " + affichageJ(vainqueur)
+						+ " dit : Dommage ! Peut etre pourras-tu me vaincre une prochaine fois!");
+			}
 		}
 	}
 

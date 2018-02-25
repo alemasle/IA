@@ -7,7 +7,7 @@
  */
 public class JoueurMiniMax implements Joueur {
 
-	public static final int DEPTH = 3;
+	public static final int DEPTH = 7;
 
 	/**
 	 * Fonction qui indique dans quelle colonne de la grille jouer, en choisissant
