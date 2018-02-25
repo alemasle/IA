@@ -15,7 +15,7 @@ public class Puissance4 {
 		JoueurHumain joueur1 = new JoueurHumain();
 
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
-		JoueurMiniMax joueur2 = new JoueurMiniMax();
+		JoueurAlphaBeta joueur2 = new JoueurAlphaBeta();
 		// JoueurHumain joueur2 = new JoueurHumain();
 
 		jouer(joueur1, joueur2); // Joueur 1 commence avant
