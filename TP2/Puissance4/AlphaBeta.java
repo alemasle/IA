@@ -6,7 +6,7 @@ import java.util.TreeMap;
  * @author Alexis LE MASLE et Gwendal DIDOT
  *
  */
-public class MiniMaxV2 {
+public class AlphaBeta {
 
 	/**
 	 * Joueur 1
@@ -24,7 +24,7 @@ public class MiniMaxV2 {
 	 * @param joueur
 	 *            Le joueur profitant de l'algorithme
 	 */
-	public MiniMaxV2(int joueur) {
+	public AlphaBeta(int joueur) {
 		this.joueur = joueur;
 	}
 
@@ -96,7 +96,7 @@ public class MiniMaxV2 {
 
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
-		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
+		if (depth != 0) { // Quand il reste encore des profondeurs a explorer
 			Grille grille = new Grille(g);
 			depth--;
 
@@ -137,7 +137,7 @@ public class MiniMaxV2 {
 
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
-		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
+		if (depth != 0 && coups.length > 0) { // Quand il reste encore des profondeurs a explorer
 			Grille grille = new Grille(g);
 			depth--;
 
