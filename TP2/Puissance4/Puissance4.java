@@ -17,7 +17,7 @@ public class Puissance4 {
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
 		Joueur joueur1 = new JoueurHumain();
-		Joueur joueur2 = new JoueurMiniMax();
+		Joueur joueur2 = new JoueurAlphaBeta();
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
 		// JoueurAlphaBeta joueur2 = new JoueurAlphaBeta();
 		// JoueurHumain joueur2 = new JoueurHumain();

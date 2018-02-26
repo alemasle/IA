@@ -1,5 +1,11 @@
 import java.util.TreeMap;
 
+/**
+ * Classe implementant l'algorithme MiniMax
+ *
+ * @author Alexis LE MASLE et Gwendal DIDOT
+ *
+ */
 public class AlphaBeta {
 
 	/**
@@ -8,18 +14,28 @@ public class AlphaBeta {
 	private final int J1 = -1;
 
 	/**
-	 * Le joueur a qui profite l'algorithme MiniMaxAlphaBeta
+	 * Le joueur a qui profite l'algorithme MiniMax
 	 */
 	private int joueur;
 
 	/**
-	 * Constructeur de la classe AlphaBeta
+	 * Constructeur de la classe MiniMax
 	 *
 	 * @param joueur
 	 *            Le joueur profitant de l'algorithme
 	 */
 	public AlphaBeta(int joueur) {
 		this.joueur = joueur;
+	}
+
+	/**
+	 * Permet de transformer le joueur en numero de joueur joueur -1 est joueur 1;
+	 * joueur 1 est joueur 2
+	 *
+	 * @return le numero du joueur
+	 */
+	private String getJoueur() {
+		return joueur == -1 ? "1" : "2";
 	}
 
 	/**
@@ -39,13 +55,27 @@ public class AlphaBeta {
 		double beta = Double.POSITIVE_INFINITY;
 
 		for (int i = 0; i < coups.length; i++) {
-
 			Grille grille = new Grille(g);
-			grille.joueEn(joueur, coups[i]);
-			tmp = miniMax(grille, depth - 1, alpha, beta);
 
-			map.put(coups[i], tmp);
+			if (grille.peutJouerEn(coups[i])) {
 
+				if (g.coupGagnant(joueur, coups[i]) || g.coupGagnant(-joueur, coups[i])) {
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("Joueur " + getJoueur() + " dit : Je gagne en colonne " + coups[i]
+							+ " ! Il Fallait etre plus attentif!");
+					return coups[i];
+				}
+
+				else {
+					grille.joueEn(joueur, coups[i]);
+					tmp = miniMax(grille, depth - 1, alpha, beta);
+					map.put(coups[i], tmp);
+				}
+
+			}
 		}
 		System.out.println("treemap : " + map.toString() + "");
 		return bestCol(map);
@@ -89,22 +119,19 @@ public class AlphaBeta {
 
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
-		if (depth != 0) { // Quand il reste encore des profondeurs a explorer
-			Grille grille = new Grille(g);
+		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
+			Grille grille = g.copie();
 			depth--;
 
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le max
 
 				if (grille.coupGagnant(joueur, coups[i])) {
-					System.out.println("Victoire Joueur 1 pour le coup : " + coups[i] + " a la profondeur " + depth);
 					return FonctionEvaluationProf.MAX;
 				}
 
 				grille.joueEn(joueur, coups[i]);
 				m = Math.max(m, miniMax(grille, depth - 1, m, beta));
-				if (m > beta) {
-					// Coupure beta
-					System.out.println("On realise une coupure beta");
+				if (m > beta){
 					return m;
 				}
 			}
@@ -112,7 +139,6 @@ public class AlphaBeta {
 		} else {
 			m = eval.evaluation(g, J1);
 		}
-		System.out.println("MaxiMin m fin : " + m);
 		return m;
 
 	}
@@ -133,22 +159,19 @@ public class AlphaBeta {
 
 		int coups[] = g.generateurCoups(); // Le tableau des coups possibles
 
-		if (depth != 0 && coups.length > 0) { // Quand il reste encore des profondeurs a explorer
-			Grille grille = new Grille(g);
+		if (depth >= 0) { // Quand il reste encore des profondeurs a explorer
+			Grille grille = g.copie();
 			depth--;
 
 			for (int i = 0; i < coups.length; i++) { // Pour chacun des coups possible on prend le min
 
 				if (grille.coupGagnant(-joueur, coups[i])) {
-					System.out.println("Victoire Joueur 2 pour le coup : " + coups[i] + " a la profondeur " + depth);
 					return FonctionEvaluationProf.MIN;
 				}
 
 				grille.joueEn(-joueur, coups[i]);
-				m = Math.min(m, maxiMin(grille, depth - 1, alpha, m));
-				if (m <= alpha) {
-					// coupure alpha
-					System.out.println("On réalise une coupe alpha");
+				m = Math.min(m, maxiMin(grille, depth - 1,  alpha, m));
+				if (m <= alpha){
 					return m;
 				}
 			}
@@ -156,7 +179,6 @@ public class AlphaBeta {
 		} else {
 			m = eval.evaluation(g, J1); // Profondeur atteinte
 		}
-		System.out.println("MiniMax m fin : " + m);
 		return m;
 
 	}
