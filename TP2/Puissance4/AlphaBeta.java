@@ -1,7 +1,7 @@
 import java.util.TreeMap;
 
 /**
- * Classe implementant l'algorithme MiniMax
+ * Classe implementant l'algorithme AlphaBeta
  *
  * @author Alexis LE MASLE et Gwendal DIDOT
  *
@@ -14,12 +14,12 @@ public class AlphaBeta {
 	private final int J1 = -1;
 
 	/**
-	 * Le joueur a qui profite l'algorithme MiniMax
+	 * Le joueur a qui profite l'algorithme AlphaBeta
 	 */
 	private int joueur;
 
 	/**
-	 * Constructeur de la classe MiniMax
+	 * Constructeur de la classe AlphaBeta
 	 *
 	 * @param joueur
 	 *            Le joueur profitant de l'algorithme
@@ -36,6 +36,15 @@ public class AlphaBeta {
 	 */
 	private String getJoueur() {
 		return joueur == -1 ? "1" : "2";
+	}
+
+	/**
+	 * Permet de retourner sous forme de String le numero de l'adversaire
+	 * 
+	 * @return le numero de l'adversaire
+	 */
+	private String getJoueurNext() {
+		return joueur == -1 ? "2" : "1";
 	}
 
 	/**
@@ -58,8 +67,7 @@ public class AlphaBeta {
 			Grille grille = new Grille(g);
 
 			if (grille.peutJouerEn(coups[i])) {
-
-				if (g.coupGagnant(joueur, coups[i]) || g.coupGagnant(-joueur, coups[i])) {
+				if (g.coupGagnant(joueur, coups[i])) {
 					System.out.println("");
 					System.out.println("");
 					System.out.println("");
@@ -68,16 +76,22 @@ public class AlphaBeta {
 							+ " ! Il Fallait etre plus attentif!");
 					return coups[i];
 				}
+				if (g.coupGagnant(-joueur, coups[i])) {
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("Joueur " + getJoueur() + " dit : Dommage joueur " + getJoueurNext()
+							+ " tu ne gagnera pas en colonne " + coups[i] + " !");
+					return coups[i];
 
-				else {
+				} else {
 					grille.joueEn(joueur, coups[i]);
 					tmp = miniMax(grille, depth - 1, alpha, beta);
 					map.put(coups[i], tmp);
 				}
-
 			}
 		}
-		System.out.println("treemap : " + map.toString() + "");
 		return bestCol(map);
 	}
 
@@ -131,7 +145,7 @@ public class AlphaBeta {
 
 				grille.joueEn(joueur, coups[i]);
 				m = Math.max(m, miniMax(grille, depth - 1, m, beta));
-				if (m > beta){
+				if (m > beta) {
 					return m;
 				}
 			}
@@ -170,8 +184,8 @@ public class AlphaBeta {
 				}
 
 				grille.joueEn(-joueur, coups[i]);
-				m = Math.min(m, maxiMin(grille, depth - 1,  alpha, m));
-				if (m <= alpha){
+				m = Math.min(m, maxiMin(grille, depth - 1, alpha, m));
+				if (m <= alpha) {
 					return m;
 				}
 			}
