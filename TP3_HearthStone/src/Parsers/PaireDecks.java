@@ -8,11 +8,11 @@ public class PaireDecks {
 	/**
 	 * Les deux listes de cartes ( les decks )
 	 */
-	private List<String> deck1 = new ArrayList<>();
+	private List<String> deck1;
 
-	private List<String> deck2 = new ArrayList<>();
+	private List<String> deck2;
 
-	public PaireDecks(ArrayList<String> deck1, ArrayList<String> deck2) {
+	public PaireDecks(List<String> deck1, List<String> deck2) {
 		this.deck1 = deck1;
 		this.deck2 = deck2;
 	}
@@ -33,4 +33,8 @@ public class PaireDecks {
 		this.deck2 = deck2;
 	}
 
+	@Override
+	public String toString() {
+		return "Le deck 1 est : " + deck1.toString() + "\n Le deck 2 est : " + deck2.toString();
+	}
 }
