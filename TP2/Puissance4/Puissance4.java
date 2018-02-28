@@ -37,10 +37,10 @@ public class Puissance4 {
 
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
-		// Joueur joueur1 = new JoueurHumain();
-		Joueur joueur1 = new JoueurAlphaBeta(10); // Les parametres de constructeur servent juste a choisir une
+		Joueur joueur1 = new JoueurHumain();
+		Joueur joueur2 = new JoueurAlphaBeta(10); // Les parametres de constructeur servent juste a choisir une
 													// profondeur
-		Joueur joueur2 = new JoueurMiniMax(3);
+		// Joueur joueur2 = new JoueurMiniMax(3);
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
 		// JoueurHumain joueur2 = new JoueurHumain();
 
