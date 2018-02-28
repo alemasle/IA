@@ -10,30 +10,44 @@
  */
 public class Puissance4 {
 
+	/**
+	 * Joueur IA
+	 */
 	private static int IA;
 
+	/**
+	 * Cas ou deux IA jouent l'une contre l'autre
+	 */
 	private static int IA2;
+
+	/**
+	 * Determine si le joueur est une IA
+	 * 
+	 * @param j
+	 *            Le joueur
+	 * @return true si j est une instance de MiniMax ou AlphaBeta
+	 */
+	private static boolean isIA(Joueur j) {
+		boolean b = false;
+		if (j instanceof JoueurMiniMax || j instanceof JoueurAlphaBeta) {
+			b = true;
+		}
+		return b;
+	}
 
 	public static void main(String[] args) {
 		// creation des joueurs et appel de la fonction jouer
-		Joueur joueur1 = new JoueurHumain();
-		Joueur joueur2 = new JoueurAlphaBeta();
+		// Joueur joueur1 = new JoueurHumain();
+		Joueur joueur1 = new JoueurAlphaBeta(10); // Les parametres de constructeur servent juste a choisir une
+													// profondeur
+		Joueur joueur2 = new JoueurMiniMax(3);
 		// JoueurAleatoire joueur2 = new JoueurAleatoire();
-		// JoueurAlphaBeta joueur2 = new JoueurAlphaBeta();
 		// JoueurHumain joueur2 = new JoueurHumain();
 
-		IA = (joueur1 instanceof JoueurMiniMax || joueur1 instanceof JoueurAlphaBeta) ? -1 : 1;
-
-		if (IA == -1 && (joueur2 instanceof JoueurMiniMax || joueur2 instanceof JoueurAlphaBeta)) { // Cas ou deux IA se
-																									// battent l'une
-																									// contre l'autre
-			IA2 = 1;
-		}
-
-		jouer(joueur2, joueur1); // Joueur 1 commence avant
+		jouer(joueur1, joueur2); // Joueur 1 commence avant
 	}
 
-	public static String affichageJ(int numJoueur) {
+	private static String affichageJ(int numJoueur) {
 		return numJoueur == Grille.JOUEUR1 ? "1" : "2";
 	}
 
@@ -56,6 +70,15 @@ public class Puissance4 {
 
 		int vainqueur = 0;// match nul
 		boolean jeuFini = false;
+
+		if (isIA(joueur1) && isIA(joueur2)) { // Les deux joueurs sont des IA
+			IA = -1;
+			IA2 = 1;
+		} else if (!isIA(joueur1) && isIA(joueur2)) { // L'IA est joueur 2
+			IA = 1;
+		} else if (isIA(joueur1) && !isIA(joueur2)) { // L'IA est joueur 1
+			IA = -1;
+		}
 
 		// boucle de jeu
 		while (!jeuFini) {
@@ -90,7 +113,7 @@ public class Puissance4 {
 
 		// affichage de la grille
 		System.out.println(grille);
-		System.out.println("");
+		// System.out.println("");
 
 		// affichage du vainqueur
 		switch (vainqueur) {
@@ -105,13 +128,14 @@ public class Puissance4 {
 			System.out.println("Match nul");
 		}
 
+		System.out.println("");
 		if (IA == vainqueur || IA2 == vainqueur) {
-			if (cptTour <= 5) {
+			if (cptTour <= 10) {
 				System.out.println("Joueur " + affichageJ(vainqueur)
 						+ " dit : Je t'ai battu vraiment vite, concentre toi la prochaine fois");
-			} else if (cptTour >= 10) {
+			} else if (cptTour >= 20) {
 				System.out.println("Joueur " + affichageJ(vainqueur)
-						+ "dit : Tu t'es bien defendu mais j'ai ete meilleur, mais tu peux toujours reesayer!");
+						+ " dit : Tu t'es bien defendu mais j'ai ete meilleur, mais tu peux toujours reesayer!");
 			} else {
 				System.out.println("Joueur " + affichageJ(vainqueur)
 						+ " dit : Dommage ! Peut etre pourras-tu me vaincre une prochaine fois!");

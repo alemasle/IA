@@ -6,7 +6,7 @@ import java.util.TreeMap;
  * @author Alexis LE MASLE et Gwendal DIDOT
  *
  */
-public class MiniMaxV2 {
+public class MiniMax {
 
 	/**
 	 * Joueur 1
@@ -24,7 +24,7 @@ public class MiniMaxV2 {
 	 * @param joueur
 	 *            Le joueur profitant de l'algorithme
 	 */
-	public MiniMaxV2(int joueur) {
+	public MiniMax(int joueur) {
 		this.joueur = joueur;
 	}
 
@@ -36,6 +36,15 @@ public class MiniMaxV2 {
 	 */
 	private String getJoueur() {
 		return joueur == -1 ? "1" : "2";
+	}
+
+	/**
+	 * Permet de retourner sous forme de String le numero de l'adversaire
+	 * 
+	 * @return le numero de l'adversaire
+	 */
+	private String getJoueurNext() {
+		return joueur == -1 ? "2" : "1";
 	}
 
 	/**
@@ -56,8 +65,7 @@ public class MiniMaxV2 {
 			Grille grille = new Grille(g);
 
 			if (grille.peutJouerEn(coups[i])) {
-
-				if (g.coupGagnant(joueur, coups[i]) || g.coupGagnant(-joueur, coups[i])) {
+				if (g.coupGagnant(joueur, coups[i])) {
 					System.out.println("");
 					System.out.println("");
 					System.out.println("");
@@ -66,16 +74,22 @@ public class MiniMaxV2 {
 							+ " ! Il Fallait etre plus attentif!");
 					return coups[i];
 				}
+				if (g.coupGagnant(-joueur, coups[i])) {
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("");
+					System.out.println("Joueur " + getJoueur() + " dit : Dommage joueur " + getJoueurNext()
+							+ " tu ne gagnera pas en colonne " + coups[i] + " !");
+					return coups[i];
 
-				else {
+				} else {
 					grille.joueEn(joueur, coups[i]);
 					tmp = miniMax(grille, depth - 1);
 					map.put(coups[i], tmp);
 				}
-
 			}
 		}
-		System.out.println("treemap : " + map.toString() + "");
 		return bestCol(map);
 	}
 

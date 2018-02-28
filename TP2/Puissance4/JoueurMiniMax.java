@@ -1,13 +1,17 @@
 
 /**
- * Joueur IA utilisant l'algorithme minimax
+ * Joueur IA utilisant l'algorithme MiniMax
  * 
  * @author Alexis LE MASLE et Gwendal DIDOT
  *
  */
 public class JoueurMiniMax implements Joueur {
 
-	public static final int DEPTH = 7;
+	public int DEPTH;
+
+	public JoueurMiniMax(int depth) {
+		this.DEPTH = depth;
+	}
 
 	/**
 	 * Fonction qui indique dans quelle colonne de la grille jouer, en choisissant
@@ -22,7 +26,7 @@ public class JoueurMiniMax implements Joueur {
 	 */
 	public Resultat coup(Grille grille, int joueur) {
 		FonctionEvaluationProf eval = new FonctionEvaluationProf();
-		MiniMaxV2 mmE = new MiniMaxV2(joueur);
+		MiniMax mmE = new MiniMax(joueur);
 		int col = mmE.getBestCoup(grille, DEPTH);
 		return new Resultat(col, eval.evaluation(grille, joueur));
 	}
