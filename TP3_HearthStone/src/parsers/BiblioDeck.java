@@ -1,4 +1,4 @@
-package Parsers;
+package parsers;
 
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class BiblioDeck {
 	private int id = 1;
 
 	/**
-	 * Ajoute si possible une carte dans la bibliotheque des cartes
+	 * Ajoute si possible une carte dans la bibliotheque
 	 * 
 	 * @param card
 	 */
@@ -23,14 +23,12 @@ public class BiblioDeck {
 		if (!bib.containsValue(card)) {
 			bib.put(id, card);
 			id++;
-		} else {
-			System.out.println("La carte " + card + " existe deja!");
 		}
 	}
 
 	/**
 	 * 
-	 * @return
+	 * @return bib la bibliotheque de carte
 	 */
 	public Map<Integer, String> getBib() {
 		return bib;
@@ -38,6 +36,19 @@ public class BiblioDeck {
 
 	public void setBib(Map<Integer, String> bib) {
 		this.bib = bib;
+	}
+
+	@Override
+	public String toString() {
+		String res = "{ ";
+
+		for (Integer i : bib.keySet()) {
+
+			res += bib.get(i) + ", ";
+
+		}
+
+		return res.substring(2, res.length()) + " }";
 	}
 
 }

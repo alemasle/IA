@@ -1,4 +1,4 @@
-package Parsers;
+package parsers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,17 +56,18 @@ public class ParserPartie {
 					System.out.println("Decks defined");
 				}
 
+				String sub = lineComputed[1].substring(1);
 				switch (lineComputed[1].charAt(0)) { // First letter define if the player was M or O, if B it's a new
 														// party
 				case 'M':
-					bib.addCard(lineComputed[1].substring(1));
-					newDeck1.add(lineComputed[1].substring(1));
+					bib.addCard(sub);
+					newDeck1.add(sub);
 					break;
 				case 'O':
-					bib.addCard(lineComputed[1].substring(1));
-					newDeck2.add(lineComputed[1].substring(1));
+					bib.addCard(sub);
+					newDeck2.add(sub);
 					break;
-				default:
+				default: // Case 'B'
 					System.out.println("Start of a new party");
 					break;
 				}
@@ -95,5 +96,12 @@ public class ParserPartie {
 
 	public BiblioDeck getBiblioDeck() {
 		return bib;
+	}
+
+	/**
+	 * Return the bib
+	 */
+	public String toString() {
+		return bib.toString();
 	}
 }
