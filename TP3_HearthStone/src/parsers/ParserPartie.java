@@ -53,7 +53,6 @@ public class ParserPartie {
 					oldIndicePArtie = indicePartie;
 					newDeck1 = new ArrayList<>(); // Deck reset
 					newDeck2 = new ArrayList<>();
-					System.out.println("Decks defined");
 				}
 
 				String sub = lineComputed[1].substring(1);
@@ -68,14 +67,12 @@ public class ParserPartie {
 					newDeck2.add(sub);
 					break;
 				default: // Case 'B'
-					System.out.println("Start of a new party");
 					break;
 				}
 			}
 
 			PaireDecks decksPartie = new PaireDecks(newDeck1, newDeck2);
 			mapDeck.put(oldIndicePArtie, decksPartie);
-			System.out.println("Decks defined");
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Scan error");
@@ -86,11 +83,11 @@ public class ParserPartie {
 
 	// GETTER ET SETTER
 
-	public File getF2s() {
+	public File getFile() {
 		return f2s;
 	}
 
-	public void setF2s(File f2s) {
+	public void setFile(File f2s) {
 		this.f2s = f2s;
 	}
 
@@ -99,8 +96,9 @@ public class ParserPartie {
 	}
 
 	/**
-	 * Return the bib
+	 * Return the bib turned into a String
 	 */
+	@Override
 	public String toString() {
 		return bib.toString();
 	}
