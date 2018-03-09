@@ -2,7 +2,9 @@ package main;
 
 import java.io.File;
 import java.util.Map;
+import java.util.SortedSet;
 
+import DataWorker.Worker;
 import parsers.PaireDecks;
 import parsers.ParserPartie;
 
@@ -23,6 +25,10 @@ public class Main {
 			System.out.println("\nPartie " + i + " :\n" + m.get(i).toString());
 
 		}
+
+		Worker worker = new Worker(pars.getBiblioDeck());
+		SortedSet<Integer> deckTranslate = worker.DeckTranslate(m.get(50).getFirst());
+		System.out.println(deckTranslate.toString());
 
 	}
 
