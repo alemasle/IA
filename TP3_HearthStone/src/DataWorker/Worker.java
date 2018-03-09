@@ -5,27 +5,55 @@ import parsers.*;
 import java.util.*;
 
 public class Worker {
-    private BiblioDeck biblioDeck;
+	private BiblioDeck biblioDeck;
 
-    public Worker(BiblioDeck biblioDeck){
-        this.biblioDeck = biblioDeck;
-    }
+	public Worker(BiblioDeck biblioDeck) {
+		this.biblioDeck = biblioDeck;
+	}
 
-    public SortedSet<Integer> DeckTranslate (List<String> deck){
-        SortedSet<Integer> deckForSPMF = new TreeSet<>(); //On rend un set qui automatiquement trié, cela permet d'éviter les carte en double
-        Map<Integer, String> bib = biblioDeck.getBib();
-        for (String card : deck) {
-            if (!bib.containsValue(card)){
-                System.out.println("La carte est inconnue, peu t'etre une erreur dans la creation de la bibliodeck.");
-                return null;
-            }
-            for (int i = 1; i <= bib.size(); i++){
-                String bibCard = bib.get(i);
-                if (bibCard.equals(card)){
-                    deckForSPMF.add(i);
-                }
-            }
-        }
-        return deckForSPMF;
-    }
+	/**
+	 * Turn a list of cards to a set of ID
+	 * 
+	 * @param deck
+	 * @return the set of ID
+	 */
+	public SortedSet<Integer> deckToID(List<String> deck) {
+		SortedSet<Integer> deckForSPMF = new TreeSet<>(); // On rend un set qui automatiquement trie, cela permet
+															// d'eviter les carte en double
+		Map<Integer, String> bib = biblioDeck.getBib();
+		for (String card : deck) {
+			try {
+				for (Integer i : bib.keySet()) {
+					String bibCard = bib.get(i);
+					if (bibCard.equals(card)) {
+						deckForSPMF.add(i);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("La carte \"" + card + "\" does not exist.");
+			}
+		}
+
+		return deckForSPMF;
+	}
+
+	/**
+	 * Turn id into Cards
+	 * 
+	 * @param id
+	 * @return List of cards from ID
+	 */
+	public List<String> idToDeck(SortedSet<Integer> id) {
+		List<String> res = new ArrayList<>();
+
+		Map<Integer, String> bib = biblioDeck.getBib();
+
+		for (Integer i : id) {
+			String s = bib.get(i);
+			res.add(s);
+		}
+
+		return res;
+	}
+
 }

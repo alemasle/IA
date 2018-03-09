@@ -1,34 +1,25 @@
 package main;
 
-import java.io.File;
-import java.util.Map;
-import java.util.SortedSet;
+import java.util.Scanner;
 
-import DataWorker.Worker;
-import parsers.PaireDecks;
-import parsers.ParserPartie;
+import DataWorker.Format;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		File f = new File("data/all_absolute+.txt");
+		Scanner sc = new Scanner(System.in);
 
-		ParserPartie pars = new ParserPartie(f);
+		System.out.println("Please, enter the path to the raw data file:\n");
 
-		Map<Integer, PaireDecks> m = pars.parseFile();
+		String in = sc.nextLine();
+		sc.close();
 
-		// System.out.println(pars.toString());
+		Format f = new Format();
 
-		for (Integer i : m.keySet()) {
+		f.toInput(in);
 
-			System.out.println("\nPartie " + i + " :\n" + m.get(i).toString());
-
-		}
-
-		Worker worker = new Worker(pars.getBiblioDeck());
-		SortedSet<Integer> deckTranslate = worker.DeckTranslate(m.get(50).getFirst());
-		System.out.println(deckTranslate.toString());
+		System.out.println("\nYour formated input file is in the inputs/ folder.");
 
 	}
 

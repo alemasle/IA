@@ -75,8 +75,9 @@ public class ParserPartie {
 			mapDeck.put(oldIndicePArtie, decksPartie);
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Scan error");
-			e.printStackTrace();
+			System.out.println("\nScan error");
+			System.out.println(e.getMessage());
+			System.exit(-1);
 		}
 		return mapDeck;
 	}

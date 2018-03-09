@@ -41,13 +41,14 @@ public class BiblioDeck {
 	@Override
 	public String toString() {
 		String res = "{ ";
-
-		for (Integer i : bib.keySet()) {
-
-			res += bib.get(i) + ", ";
-
+		Set<Integer> s = bib.keySet();
+		for (Integer i : s) {
+			if (i == s.size() - 1) {
+				res += bib.get(i);
+			} else {
+				res += bib.get(i) + ", ";
+			}
 		}
-
 		return res.substring(2, res.length()) + " }";
 	}
 
