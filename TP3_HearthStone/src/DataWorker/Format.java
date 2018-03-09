@@ -15,14 +15,12 @@ public class Format {
 
 	private BiblioDeck bib;
 
-	private String input = "inputs/";
+	private String inputFold = "inputs/";
 
-	private String output = "outputs/";
+	private String outputFold = "outputs/";
 
-	// Files names without folder if needed
-	private String rawInput;
-
-	private String rawOutput;
+	// File name without folder if needed
+	private String rawFile;
 
 	/**
 	 * Format from a file of raw Data to the formated InputFile input.txt
@@ -39,13 +37,13 @@ public class Format {
 			Map<Integer, PaireDecks> map = pp.parseFile(); // Create the bibliodeck and the map
 			bib = pp.getBiblioDeck();
 
-			File dir = new File(input);
+			File dir = new File(inputFold);
 
 			if (!dir.exists()) {
 				if (!dir.mkdirs()) {
-					throw new Exception("The folder " + input + " does not exist and cannot be created.");
+					throw new Exception("The folder " + inputFold + " does not exist and cannot be created.");
 				}
-				System.out.println("Folder " + input + " has been created.");
+				System.out.println("Folder " + inputFold + " has been created.");
 			}
 
 			File input = new File("inputs/input-" + path); // File create to store input data ( raw data formated )
@@ -111,31 +109,22 @@ public class Format {
 	private String parsingRaw(String path) {
 		String str[] = path.split("/");
 
-		if (str[0].compareTo("outputs") == 0) {
-			rawOutput = str[str.length - 1];
-			return rawOutput;
-		}
-
-		rawInput = str[str.length - 1];
-		return rawInput;
+		rawFile = str[str.length - 1];
+		return rawFile;
 	}
 
 	///////////// GETTER input and output folder path /////////////
 
-	public String getInput() {
-		return input;
+	public String getInputFold() {
+		return inputFold;
 	}
 
-	public String getOutput() {
-		return output;
+	public String getOutputFold() {
+		return outputFold;
 	}
 
-	public String getRawInput() {
-		return rawInput;
-	}
-
-	public String getRawOutput() {
-		return rawOutput;
+	public String getRawFile() {
+		return rawFile;
 	}
 
 }
