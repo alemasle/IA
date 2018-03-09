@@ -15,16 +15,22 @@ public class Format {
 
 	private BiblioDeck bib;
 
-	public Format() {
+	private String input = "inputs/";
 
-	}
+	private String output = "outputs/";
+
+	// Files names without folder if needed
+	private String rawInput;
+
+	private String rawOutput;
 
 	/**
 	 * Format from a file of raw Data to the formated InputFile input.txt
 	 * 
 	 * @param fileData
+	 * @throws Exception
 	 */
-	public void toInput(String fileData) {
+	public void toInput(String fileData) throws Exception {
 		try {
 			String path = parsingRaw(fileData);
 			File data = new File(fileData); // File raw data
@@ -32,6 +38,15 @@ public class Format {
 			ParserPartie pp = new ParserPartie(data);
 			Map<Integer, PaireDecks> map = pp.parseFile(); // Create the bibliodeck and the map
 			bib = pp.getBiblioDeck();
+
+			File dir = new File(input);
+
+			if (!dir.exists()) {
+				if (!dir.mkdirs()) {
+					throw new Exception("The folder " + input + " does not exist and cannot be created.");
+				}
+				System.out.println("Folder " + input + " has been created.");
+			}
 
 			File input = new File("inputs/input-" + path); // File create to store input data ( raw data formated )
 			FileWriter fw = new FileWriter(input); // Initialize
@@ -57,6 +72,11 @@ public class Format {
 
 	}
 
+	public void fromOutput(String filename) {
+		// String path = parsingRaw(filename);
+		// TODO
+	}
+
 	/**
 	 * Format frome SortedSet to String
 	 * 
@@ -76,14 +96,40 @@ public class Format {
 	}
 
 	/**
-	 * Select the file name in a path
+	 * Select the file name in a path and change rawInput or rawOutput according to
+	 * the file path
 	 * 
 	 * @param path
 	 * @return the file name
 	 */
 	private String parsingRaw(String path) {
 		String str[] = path.split("/");
-		return str[str.length - 1];
+
+		if (str[0].compareTo("outputs") == 0) {
+			rawOutput = str[str.length - 1];
+			return rawOutput;
+		}
+
+		rawInput = str[str.length - 1];
+		return rawInput;
+	}
+
+	///////////// GETTER input and output folder path /////////////
+
+	public String getInput() {
+		return input;
+	}
+
+	public String getOutput() {
+		return output;
+	}
+
+	public String getRawInput() {
+		return rawInput;
+	}
+
+	public String getRawOutput() {
+		return rawOutput;
 	}
 
 }

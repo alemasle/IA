@@ -1,8 +1,8 @@
 package DataWorker;
 
-import parsers.*;
-
 import java.util.*;
+
+import parsers.*;
 
 public class Worker {
 	private BiblioDeck biblioDeck;

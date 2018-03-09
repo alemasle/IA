@@ -6,11 +6,11 @@ import DataWorker.Format;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Please, enter the path to the raw data file:\n");
+		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
 
 		String in = sc.nextLine();
 		sc.close();
@@ -19,7 +19,7 @@ public class Main {
 
 		f.toInput(in);
 
-		System.out.println("\nYour formated input file is in the inputs/ folder.");
+		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
 
 	}
 
