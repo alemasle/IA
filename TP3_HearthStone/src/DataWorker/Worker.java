@@ -1,7 +1,6 @@
 package DataWorker;
 
 import java.util.*;
-
 import parsers.*;
 
 public class Worker {
@@ -12,15 +11,15 @@ public class Worker {
 	}
 
 	/**
-	 * Turn a list of cards to a set of ID
+	 * Turn a list of cards into a set of ID
 	 * 
 	 * @param deck
 	 * @return the set of ID
 	 */
 	public SortedSet<Integer> deckToID(List<String> deck) {
-		SortedSet<Integer> deckForSPMF = new TreeSet<>(); // On rend un set qui automatiquement trie, cela permet
-															// d'eviter les carte en double
+		SortedSet<Integer> deckForSPMF = new TreeSet<>(); // Create a set to avoid double items
 		Map<Integer, String> bib = biblioDeck.getBib();
+
 		for (String card : deck) {
 			try {
 				for (Integer i : bib.keySet()) {

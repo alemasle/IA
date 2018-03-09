@@ -72,7 +72,13 @@ public class Format {
 
 	}
 
-	public void fromOutput(String filename) {
+	/**
+	 * Turn the output file into a data structure
+	 * 
+	 * @param filename
+	 * @throws Exception
+	 */
+	public void fromOutput(String filename) throws Exception {
 		// String path = parsingRaw(filename);
 		// TODO
 	}

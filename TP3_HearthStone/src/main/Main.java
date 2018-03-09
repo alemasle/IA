@@ -17,9 +17,13 @@ public class Main {
 
 		Format f = new Format();
 
-		f.toInput(in);
+		f.toInput(in); // Function to format raw data into formated input file for SPMF
 
 		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
+
+		// Function to use SPMF TODO
+
+		// Function to read the output TODO
 
 	}
 
