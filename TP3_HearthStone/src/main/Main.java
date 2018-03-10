@@ -1,10 +1,18 @@
 package main;
 
-import java.util.Scanner;
+import java.util.*;
 import DataWorker.Format;
+import DataWorker.Worker;
+import parsers.BiblioDeck;
 
 public class Main {
 
+	/**
+	 * Execute the commands given in parameter
+	 * 
+	 * @param cmd
+	 * @throws Exception
+	 */
 	private static void execCmd(String cmd) throws Exception {
 		try {
 			Runtime r = Runtime.getRuntime();
@@ -14,6 +22,62 @@ public class Main {
 			System.out.println(e.getMessage());
 			throw new Exception("Command failed.");
 		}
+	}
+
+	/**
+	 * Turn a List of array of int into a String in order to print it.
+	 * 
+	 * @param sol
+	 * @return print The String to prompt
+	 */
+	private static String print(List<int[]> sol) {
+		String print = "{";
+		for (int a = 0; a < sol.size(); a++) {
+			print += " [";
+			int[] tab = sol.get(a);
+			for (int i = 0; i < tab.length; i++) {
+				if (i == tab.length - 1)
+					print += tab[i];
+				else
+					print += tab[i] + " ";
+			}
+			if (a == sol.size() - 1)
+				print += "] }";
+			else
+				print += "] ";
+		}
+		return print;
+	}
+
+	private static String printCards(List<int[]> li, BiblioDeck bib) {
+		String res = "";
+		Worker w = new Worker(bib);
+
+		for (int[] i : li) {
+			List<Integer> tmp = new ArrayList<>();
+			for (int e = 0; e < i.length - 1; e++) {
+				tmp.add(i[e]);
+			}
+
+			List<String> r = w.idToDeck(tmp);
+
+			res += "[ " + listP(r) + " ] ";
+
+		}
+
+		return res;
+	}
+
+	private static String listP(List<String> l) {
+		String res = "";
+		for (int i = 0; i < l.size(); i++) {
+			if (i == l.size() - 1)
+				res += l.get(i);
+			else
+				res += l.get(i) + " ";
+		}
+
+		return res;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -29,23 +93,32 @@ public class Main {
 		f.toInput(in); // Function to format raw data into formated input file for SPMF
 
 		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
+		System.out.println("\nEnter a threshold (pourcentage) :\n"); // absolute+.txt a 412 transactions donc 15% de 412
+																		// = 61,9 donc l'output n'affichera que les
+																		// supports
+																		// >= 62 ( dans ce cas ci il y'a 9 itemsets
+																		// frequent
+																		// fermes correspondant )
+		String p100 = sc.nextLine();
 
-		System.out.println("\nEnter a pourcentage:\n"); // absolute+.txt a 412 transactions donc 15% de 412 = 61,9 donc
-														// l'output n'affichera que les supports >= 62
-
-		// Function to use SPMF TODO
+		// Function to use SPMF
 		String cmd = "java -jar spmf.jar run Charm_bitset inputs/input-" + f.getRawFile() + " outputs/output-"
-				+ f.getRawFile() + " " + sc.nextLine() + "%";
+				+ f.getRawFile() + " " + p100 + "%";
 
-		System.out.println("Cmd : " + cmd);
+		System.out.println("\nRawData file : " + f.getRawFile() + "\nInput file : inputs/input-" + f.getRawFile()
+				+ "\nOutput file : outputs/output-" + f.getRawFile() + "\nThreshold : " + p100 + "%\n");
 
 		execCmd(cmd);
+		System.out.println("Output file has been stored in \"outputs/\"\n");
+		// Function to read the output TODO
+
+		List<int[]> lInt = f.fromOutput("outputs/output-" + f.getRawFile());
+
+		System.out.println(print(lInt));
+		System.out.println(printCards(lInt, f.getBib()));
 
 		sc.close();
 
-		System.out.println("Done");
-
-		// Function to read the output TODO
 	}
 
 }

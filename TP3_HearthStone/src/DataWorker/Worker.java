@@ -16,7 +16,7 @@ public class Worker {
 	 * @param deck
 	 * @return the set of ID
 	 */
-	public SortedSet<Integer> deckToID(List<String> deck) {
+	public Set<Integer> deckToID(List<String> deck) {
 		SortedSet<Integer> deckForSPMF = new TreeSet<>(); // Create a set to avoid double items
 		Map<Integer, String> bib = biblioDeck.getBib();
 
@@ -37,18 +37,20 @@ public class Worker {
 	}
 
 	/**
-	 * Turn id into Cards
+	 * Turn a list of id into a list of Cards
 	 * 
 	 * @param id
-	 * @return List of cards from ID
+	 *            The set of id
+	 * @return res The List of cards from the list of ID
 	 */
-	public List<String> idToDeck(SortedSet<Integer> id) {
+	public List<String> idToDeck(List<Integer> id) {
 		List<String> res = new ArrayList<>();
 
 		Map<Integer, String> bib = biblioDeck.getBib();
 
 		for (Integer i : id) {
 			String s = bib.get(i);
+			// if (s != null)
 			res.add(s);
 		}
 

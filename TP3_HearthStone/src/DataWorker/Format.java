@@ -20,6 +20,7 @@ public class Format {
 	private String outputFold = "outputs/";
 
 	// File name without folder if needed
+	// can be the rawData file name or the output file name
 	private String rawFile;
 
 	/**
@@ -38,12 +39,19 @@ public class Format {
 			bib = pp.getBiblioDeck();
 
 			File dir = new File(inputFold);
+			File dirOut = new File(outputFold);
 
-			if (!dir.exists()) {
+			if (!dir.exists()) { // If the folder inputs/ does not exists.
 				if (!dir.mkdirs()) {
 					throw new Exception("The folder " + inputFold + " does not exist and cannot be created.");
 				}
 				System.out.println("Folder " + inputFold + " has been created.");
+			}
+
+			if (!dirOut.exists()) { // If the folder outputs/ does not exists.
+				if (!dirOut.mkdirs())
+					throw new Exception("The folder " + outputFold + " does not exist and cannot be created.");
+				System.out.println("Folder " + outputFold + " has been created.");
 			}
 
 			File input = new File("inputs/input-" + path); // File create to store input data ( raw data formated )
@@ -53,8 +61,8 @@ public class Format {
 
 			for (Integer i : map.keySet()) {
 
-				SortedSet<Integer> s1 = worker.deckToID(map.get(i).getFirst());
-				SortedSet<Integer> s2 = worker.deckToID(map.get(i).getSecond());
+				Set<Integer> s1 = worker.deckToID(map.get(i).getFirst());
+				Set<Integer> s2 = worker.deckToID(map.get(i).getSecond());
 
 				fw.write(format(s1)); // We write the transactions in the inputfile
 				fw.write(format(s2));
@@ -76,17 +84,49 @@ public class Format {
 	 * @param filename
 	 * @throws Exception
 	 */
-	public void fromOutput(String filename) throws Exception {
-		// String path = parsingRaw(filename);
-		// TODO
+	public List<int[]> fromOutput(String filename) throws Exception {
+		List<int[]> res = new ArrayList<int[]>();
+
+		File f = new File(filename);
+		Scanner sc = new Scanner(f);
+
+		while (sc.hasNextLine()) {
+			res.add(formatOut(sc.nextLine()));
+		}
+
+		sc.close();
+		return res;
 	}
 
 	/**
-	 * Format frome SortedSet to String
+	 * Turn an output string into an array of integer concat with it's support
+	 * 
+	 * @param line
+	 *            The line to format into an array
+	 * @return res An Array of Integer where the elements are cards ID and the last
+	 *         element is the support
+	 */
+	private int[] formatOut(String line) {
+		String pars[] = line.split("#SUP:");
+		int sup = Integer.parseInt(pars[1].substring(1));
+		String cis[] = pars[0].split(" ");
+		int res[] = new int[cis.length + 1];
+
+		for (int i = 0; i < cis.length; i++) {
+			res[i] = Integer.parseInt(cis[i]);
+		}
+
+		res[res.length - 1] = sup;
+
+		return res;
+	}
+
+	/**
+	 * Format frome SortedSet to String ready to input
 	 * 
 	 * @return the result String
 	 */
-	private String format(SortedSet<Integer> set) {
+	private String format(Set<Integer> set) {
 		String s = "";
 		Iterator<Integer> it = set.iterator();
 
@@ -125,6 +165,10 @@ public class Format {
 
 	public String getRawFile() {
 		return rawFile;
+	}
+
+	public BiblioDeck getBib() {
+		return bib;
 	}
 
 }
