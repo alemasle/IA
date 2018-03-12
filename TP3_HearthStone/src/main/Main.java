@@ -1,8 +1,9 @@
 package main;
 
 import java.util.*;
-import DataWorker.Format;
-import DataWorker.Worker;
+
+import dataWorker.Format;
+import dataWorker.Worker;
 import parsers.BiblioDeck;
 
 public class Main {

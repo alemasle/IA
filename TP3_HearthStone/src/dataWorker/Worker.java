@@ -1,4 +1,4 @@
-package DataWorker;
+package dataWorker;
 
 import java.util.*;
 import parsers.*;
