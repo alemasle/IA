@@ -89,13 +89,14 @@ public class Main {
 	private static void partieA() throws Exception {
 		Scanner sc = new Scanner(System.in);
 
+		System.out.println("Charm Mode:");
 		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
 
 		String in = sc.nextLine();
 
 		Format f = new Format();
 
-		f.toInput(in); // Function to format raw data into formated input file for SPMF
+		f.toCharm(in); // Function to format raw data into formated input file for SPMF
 
 		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
 		System.out.println("\nEnter a threshold (pourcentage) :\n"); // absolute+.txt a 412 transactions donc 15% de 412
@@ -111,7 +112,7 @@ public class Main {
 				+ f.getRawFile() + " " + p100 + "%";
 
 		System.out.println("\nRawData file : " + f.getRawFile() + "\nInput file : inputs/input-" + f.getRawFile()
-				+ "\nOutput file : outputs/output-" + f.getRawFile() + "\nThreshold : " + p100 + "%\n");
+				+ "\nOutput file : outputs/outputCharm-" + f.getRawFile() + "\nThreshold : " + p100 + "%\n");
 
 		execCmd(cmd);
 		System.out.println("Output file has been stored in \"outputs/\"\n");
@@ -127,17 +128,35 @@ public class Main {
 	}
 
 	/**
-	 * Represent the second part of the practice lab (Bonus)
+	 * Represent the second part of the practice lab. (Bonus)
 	 * 
 	 * @throws Exception
 	 */
 	public static void partieB() throws Exception {
 
+		// format data
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("CloSpan Mode:");
+		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
+
+		String in = sc.nextLine();
+
+		Format f = new Format();
+
+		f.toCloSpan(in); // Function to format raw data into formated input file for SPMF
+		
+		System.out.println("Done");
+
+		// Use cmd
+
+		// Read results
+
 	}
 
 	public static void main(String[] args) throws Exception {
 
-		partieA();
+		// partieA();
 
 		partieB(); // Bonus
 

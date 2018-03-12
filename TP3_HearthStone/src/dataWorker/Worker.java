@@ -57,4 +57,34 @@ public class Worker {
 		return res;
 	}
 
+	public List<Set<Integer>> sequencesToID(List<ActionsPlayer> la) {
+		List<Set<Integer>> lR = new ArrayList<>();
+
+		Map<Integer, String> bib = biblioDeck.getBib();
+		System.out.println("Size List Actions " + la.size());
+
+		for (ActionsPlayer a : la) {
+
+			System.out.println("ActionsPlayer : " + a.getActions().size());
+
+			Set<Integer> s = new TreeSet<>();
+
+			for (String card : a.getActions()) {
+
+				for (Integer i : bib.keySet()) {
+					if (bib.get(i).compareTo(card) == 0) {
+						System.out.println(card);
+						s.add(i);
+					}
+				}
+			}
+
+			lR.add(s);
+
+		}
+
+		return lR;
+
+	}
+
 }

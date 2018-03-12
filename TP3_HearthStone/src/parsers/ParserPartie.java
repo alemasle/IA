@@ -26,12 +26,72 @@ public class ParserPartie {
 		this.bib = new BiblioDeck();
 	}
 
+	public Map<Integer, PaireActions> parseFileToSeq() {
+
+		Map<Integer, PaireActions> map = new HashMap<>();
+
+		try {
+			Scanner scan = new Scanner(f2s);
+
+			List<ActionsPlayer> act1 = new ArrayList<>();
+			List<ActionsPlayer> act2 = new ArrayList<>();
+			ActionsPlayer a = new ActionsPlayer();
+			int oldIndicePArtie = 0;
+			char joueur = 'B';
+			char joueur1 = 'B';
+			char joueur2 = 'B';
+
+			while (scan.hasNextLine()) { // File reading line per line
+				String line = scan.nextLine();
+				String[] lineComputed = line.split(" ");
+				int indicePartie = Integer.parseInt(lineComputed[0]);
+
+				if (joueur == 'B') {
+					joueur = lineComputed[1].charAt(0);
+					joueur1 = joueur;
+					joueur2 = joueur1 == 'M' ? 'O' : 'M';
+				}
+
+				if (oldIndicePArtie != indicePartie) {
+					PaireActions p = new PaireActions(act1, act2);
+					map.put(oldIndicePArtie, p);
+					act1 = new ArrayList<>();
+					act2 = new ArrayList<>();
+					oldIndicePArtie = indicePartie;
+				}
+
+				if (joueur != lineComputed[1].charAt(0)) {
+					if (joueur == joueur1) {
+						act1.add(a);
+					} else if (joueur == joueur2) {
+						act2.add(a);
+					}
+					joueur = lineComputed[1].charAt(0);
+					a = new ActionsPlayer();
+				} else {
+					a.addAction(lineComputed[1].substring(1));
+				}
+			}
+
+			System.out.println("Size act1 : " + act1.size() + " Size act2 : " + act2.size());
+			PaireActions p = new PaireActions(act1, act2);
+			map.put(oldIndicePArtie, p);
+
+		} catch (FileNotFoundException e) {
+			System.out.println("\nScan error");
+			System.out.println(e.getMessage());
+			System.exit(-1);
+		}
+
+		return map;
+	}
+
 	/**
 	 * Retourne la map ayant pour clef l'id de la partie
 	 * 
 	 * @return mapDeck
 	 */
-	public Map<Integer, PaireDecks> parseFile() {
+	public Map<Integer, PaireDecks> parseFileToDecks() {
 		Scanner scan;
 		Map<Integer, PaireDecks> mapDeck = new HashMap<Integer, PaireDecks>();
 		try {
