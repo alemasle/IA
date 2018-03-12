@@ -126,11 +126,20 @@ public class Main {
 
 	}
 
+	/**
+	 * Represent the second part of the practice lab (Bonus)
+	 * 
+	 * @throws Exception
+	 */
+	public static void partieB() throws Exception {
+
+	}
+
 	public static void main(String[] args) throws Exception {
 
 		partieA();
-		
-		//		partieB();	// Bonus
+
+		partieB(); // Bonus
 
 	}
 
