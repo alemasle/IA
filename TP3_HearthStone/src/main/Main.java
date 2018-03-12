@@ -81,8 +81,12 @@ public class Main {
 		return res;
 	}
 
-	public static void main(String[] args) throws Exception {
-
+	/**
+	 * Represent the first part of the practice lab.
+	 * 
+	 * @throws Exception
+	 */
+	private static void partieA() throws Exception {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
@@ -111,7 +115,7 @@ public class Main {
 
 		execCmd(cmd);
 		System.out.println("Output file has been stored in \"outputs/\"\n");
-		// Function to read the output TODO
+		// Function to read the output
 
 		List<int[]> lInt = f.fromOutput("outputs/output-" + f.getRawFile());
 
@@ -119,6 +123,14 @@ public class Main {
 		System.out.println(printCards(lInt, f.getBib()));
 
 		sc.close();
+
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		partieA();
+		
+		//		partieB();	// Bonus
 
 	}
 
