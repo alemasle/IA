@@ -33,20 +33,24 @@ public class Main {
 	 */
 	private static String print(List<int[]> sol) {
 		String print = "{";
+
 		for (int a = 0; a < sol.size(); a++) {
 			print += " [";
 			int[] tab = sol.get(a);
+
 			for (int i = 0; i < tab.length; i++) {
 				if (i == tab.length - 1)
-					print += tab[i];
+					print += ": #SUP=" + tab[i];
 				else
 					print += tab[i] + " ";
 			}
+
 			if (a == sol.size() - 1)
 				print += "] }";
 			else
 				print += "] ";
 		}
+
 		return print;
 	}
 
@@ -108,17 +112,17 @@ public class Main {
 		String p100 = sc.nextLine();
 
 		// Function to use SPMF
-		String cmd = "java -jar spmf.jar run Charm_bitset inputs/input-" + f.getRawFile() + " outputs/output-"
+		String cmd = "java -jar spmf.jar run Charm_bitset inputs/inputCharm-" + f.getRawFile() + " outputs/outputCharm-"
 				+ f.getRawFile() + " " + p100 + "%";
 
-		System.out.println("\nRawData file : " + f.getRawFile() + "\nInput file : inputs/input-" + f.getRawFile()
+		System.out.println("\nRawData file : " + f.getRawFile() + "\nInput file : inputs/inputCharm-" + f.getRawFile()
 				+ "\nOutput file : outputs/outputCharm-" + f.getRawFile() + "\nThreshold : " + p100 + "%\n");
 
 		execCmd(cmd);
 		System.out.println("Output file has been stored in \"outputs/\"\n");
 		// Function to read the output
 
-		List<int[]> lInt = f.fromOutput("outputs/output-" + f.getRawFile());
+		List<int[]> lInt = f.fromOutput("outputs/outputCharm-" + f.getRawFile());
 
 		System.out.println(print(lInt));
 		System.out.println(printCards(lInt, f.getBib()));
@@ -145,7 +149,7 @@ public class Main {
 		Format f = new Format();
 
 		f.toCloSpan(in); // Function to format raw data into formated input file for SPMF
-		
+
 		System.out.println("Done");
 
 		// Use cmd
@@ -156,9 +160,9 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		// partieA();
+		partieA();
 
-		partieB(); // Bonus
+		// partieB(); // Bonus
 
 	}
 
