@@ -11,32 +11,6 @@ public class Worker {
 	}
 
 	/**
-	 * Turn a list of cards into a set of ID
-	 * 
-	 * @param deck
-	 * @return the set of ID
-	 */
-	public Set<Integer> deckToID(List<String> deck) {
-		SortedSet<Integer> deckForSPMF = new TreeSet<>(); // Create a set to avoid double items
-		Map<Integer, String> bib = biblioDeck.getBib();
-
-		for (String card : deck) {
-			try {
-				for (Integer i : bib.keySet()) {
-					String bibCard = bib.get(i);
-					if (bibCard.equals(card)) {
-						deckForSPMF.add(i);
-					}
-				}
-			} catch (Exception e) {
-				System.out.println("La carte \"" + card + "\" does not exist.");
-			}
-		}
-
-		return deckForSPMF;
-	}
-
-	/**
 	 * Turn a list of id into a list of Cards
 	 * 
 	 * @param id
@@ -55,6 +29,66 @@ public class Worker {
 		}
 
 		return res;
+	}
+
+	/**
+	 * Turn a list of cards into a set of ID
+	 * 
+	 * @param deck
+	 * @return the set of ID
+	 */
+	public Set<Integer> deckToID(List<String> deck) {
+		SortedSet<Integer> deckForSPMF = new TreeSet<>();
+
+		Map<Integer, String> bib = biblioDeck.getBib();
+
+		for (String card : deck) {
+
+			for (Integer i : bib.keySet()) {
+
+				String bibCard = bib.get(i);
+
+				if (bibCard.compareTo(card) == 0) {
+					deckForSPMF.add(i);
+				}
+
+			}
+		}
+
+		return deckForSPMF;
+	}
+
+	public List<Set<Integer>> sequencesToID(List<ActionsPlayer> la) {
+		List<Set<Integer>> lR = new ArrayList<>();
+
+		Map<Integer, String> bib = biblioDeck.getBib();
+
+		for (ActionsPlayer a : la) {
+
+			Set<Integer> s = new TreeSet<>();
+
+			for (String card : a.getActions()) {
+
+				for (Integer i : bib.keySet()) {
+
+					if (bib.get(i).compareTo(card) == 0) {
+						if (i == 2) {
+							System.out.println("carte 2: " + bib.get(i));
+						}
+						if(i == 45){
+							System.out.println("carte 45: " + bib.get(i));
+						}
+						s.add(i);
+					}
+				}
+			}
+
+			lR.add(s);
+
+		}
+
+		return lR;
+
 	}
 
 }

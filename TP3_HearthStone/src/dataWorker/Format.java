@@ -24,18 +24,21 @@ public class Format {
 	private String rawFile;
 
 	/**
-	 * Format from a file of raw Data to the formated InputFile input.txt
+	 * Format from a file of raw Data to the formated Charm InputFile input.txt
 	 * 
 	 * @param fileData
 	 * @throws Exception
 	 */
-	public void toInput(String fileData) throws Exception {
+	public void toCharm(String fileData) throws Exception {
 		try {
 			String path = parsingRaw(fileData);
 			File data = new File(fileData); // File raw data
 
 			ParserPartie pp = new ParserPartie(data);
-			Map<Integer, PaireDecks> map = pp.parseFile(); // Create the bibliodeck and the map
+			Map<Integer, PaireDecks> map = pp.parseFileToDecks(); // Create the
+																	// bibliodeck
+																	// and the
+																	// map
 			bib = pp.getBiblioDeck();
 
 			File dir = new File(inputFold);
@@ -54,7 +57,11 @@ public class Format {
 				System.out.println("Folder " + outputFold + " has been created.");
 			}
 
-			File input = new File("inputs/input-" + path); // File create to store input data ( raw data formated )
+			File input = new File("inputs/inputCharm-" + path); // File create
+																// to store
+																// input data (
+																// raw data
+																// formated )
 			FileWriter fw = new FileWriter(input); // Initialize
 
 			Worker worker = new Worker(bib);
@@ -64,8 +71,9 @@ public class Format {
 				Set<Integer> s1 = worker.deckToID(map.get(i).getFirst());
 				Set<Integer> s2 = worker.deckToID(map.get(i).getSecond());
 
-				fw.write(format(s1)); // We write the transactions in the inputfile
-				fw.write(format(s2));
+				fw.write(formatCharm(s1)); // We write the transactions in the
+											// inputfile
+				fw.write(formatCharm(s2));
 
 			}
 
@@ -75,6 +83,72 @@ public class Format {
 			System.out.println("File Error");
 			e.printStackTrace();
 		}
+
+	}
+
+	/**
+	 * Format a RawData file into a formated file CloSpan
+	 * 
+	 * @param filename
+	 * @throws Exception
+	 */
+	public void toCloSpan(String filename) throws Exception {
+		String path = parsingRaw(filename);
+		File data = new File(filename);
+
+		ParserPartie pp = new ParserPartie(data);
+		Map<Integer, PaireActions> map = pp.parseFileToSeq(); // Create the
+																// bibliodeck
+																// and the map
+		bib = pp.getBiblioDeck();
+
+		File dir = new File(inputFold);
+		File dirOut = new File(outputFold);
+
+		if (!dir.exists()) { // If the folder inputs/ does not exists.
+			if (!dir.mkdirs()) {
+				throw new Exception("The folder " + inputFold + " does not exist and cannot be created.");
+			}
+			System.out.println("Folder " + inputFold + " has been created.");
+		}
+
+		if (!dirOut.exists()) { // If the folder outputs/ does not exists.
+			if (!dirOut.mkdirs())
+				throw new Exception("The folder " + outputFold + " does not exist and cannot be created.");
+			System.out.println("Folder " + outputFold + " has been created.");
+		}
+
+		File input = new File("inputs/inputCloSpan-" + path); // File create to
+																// store input
+																// data ( raw
+																// data formated
+																// )
+		FileWriter fw = new FileWriter(input); // Initialize
+
+		Worker worker = new Worker(bib);
+
+		for (Integer i : map.keySet()) {
+
+			List<Set<Integer>> s1 = worker.sequencesToID(map.get(i).getFirst()); // All
+																					// the
+																					// actions
+																					// for
+																					// player
+																					// 1
+			List<Set<Integer>> s2 = worker.sequencesToID(map.get(i).getSecond()); // All
+																					// the
+																					// actions
+																					// for
+																					// player
+																					// 2
+
+			fw.write(formatCloSpan(s1)); // We write the list of sequences of
+											// actions in the inputfile
+			fw.write(formatCloSpan(s2));
+
+		}
+
+		fw.close(); // Close the FileWriter
 
 	}
 
@@ -103,8 +177,8 @@ public class Format {
 	 * 
 	 * @param line
 	 *            The line to format into an array
-	 * @return res An Array of Integer where the elements are cards ID and the last
-	 *         element is the support
+	 * @return res An Array of Integer where the elements are cards ID and the
+	 *         last element is the support
 	 */
 	private int[] formatOut(String line) {
 		String pars[] = line.split("#SUP:");
@@ -122,11 +196,11 @@ public class Format {
 	}
 
 	/**
-	 * Format frome SortedSet to String ready to input
+	 * Format from SortedSet to String ready to input in Charm model
 	 * 
 	 * @return the result String
 	 */
-	private String format(Set<Integer> set) {
+	private String formatCharm(Set<Integer> set) {
 		String s = "";
 		Iterator<Integer> it = set.iterator();
 
@@ -140,8 +214,33 @@ public class Format {
 	}
 
 	/**
-	 * Select the file name in a path and change rawInput or rawOutput according to
-	 * the file path
+	 * Format the list of actions in a String make for CloSpan input file
+	 * 
+	 * @param ls
+	 *            The list to format in a String
+	 * @return res The String formated
+	 */
+	private String formatCloSpan(List<Set<Integer>> ls) {
+		String res = "";
+
+		for (Set<Integer> s : ls) {
+
+			Iterator<Integer> it = s.iterator();
+			while (it.hasNext()) {
+				res += it.next();
+				if (it.hasNext())
+					res += " ";
+				else
+					res += " -1 ";
+			}
+		}
+		res += "-2\n";
+		return res;
+	}
+
+	/**
+	 * Select the file name in a path and change rawInput or rawOutput according
+	 * to the file path
 	 * 
 	 * @param path
 	 * @return the file name
