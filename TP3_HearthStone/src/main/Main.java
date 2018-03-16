@@ -95,20 +95,23 @@ public class Main {
 
 		System.out.println("Charm Mode:");
 		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
+		System.out.print("> ");
 
 		String in = sc.nextLine();
 
 		Format f = new Format();
 
-		f.toCharm(in); // Function to format raw data into formated input file for SPMF
+		f.toCharm(in); // Function to format raw data into formated input file
+						// for SPMF
 
 		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
-		System.out.println("\nEnter a threshold (pourcentage) :\n"); // absolute+.txt a 412 transactions donc 15% de 412
-																		// = 61,9 donc l'output n'affichera que les
-																		// supports
-																		// >= 62 ( dans ce cas ci il y'a 9 itemsets
-																		// frequent
-																		// fermes correspondant )
+		System.out.println("\nEnter a threshold (pourcentage) :\n");
+		System.out.print("> ");
+
+		// absolute+.txt a 412 transactions donc 15% de 412 = 61,9 donc l'output
+		// n'affichera que les supports >= 62 (dans ce cas ci il y'a 9 itemsets
+		// frequent fermes correspondant)
+
 		String p100 = sc.nextLine();
 
 		// Function to use SPMF
@@ -143,26 +146,57 @@ public class Main {
 
 		System.out.println("CloSpan Mode:");
 		System.out.println("Please, enter the path to the raw data file: (Examples in \"data/\")\n");
+		System.out.print("> ");
 
 		String in = sc.nextLine();
 
 		Format f = new Format();
 
-		f.toCloSpan(in); // Function to format raw data into formated input file for SPMF
+		f.toCloSpan(in); // Function to format raw data into formated input file
+							// for SPMF
 
-		System.out.println("Done");
+		System.out.println("\nYour formated input file is in the \"inputs/\" folder.");
+		System.out.println("\nEnter a threshold (pourcentage) :\n");
+		System.out.print("> ");
 
-		// Use cmd
+		// absolute+.txt a 412 transactions donc 15% de 412 = 61,9 donc l'output
+		// n'affichera que les supports >= 62 (dans ce cas ci il y'a 9 itemsets
+		// frequent fermes correspondant)
 
-		// Read results
+		String p100 = sc.nextLine();
+
+		String cmd = "java -jar spmf.jar run CloSpan inputs/inputCloSpan-" + f.getRawFile() + " outputs/outputCloSpan-"
+				+ f.getRawFile() + " " + p100 + "%";
+
+		execCmd(cmd);
+
+		System.out.println("Output file has been stored in \"outputs/\"\n");
+
+		sc.close();
 
 	}
 
 	public static void main(String[] args) throws Exception {
 
-		partieA();
+		Scanner sc = new Scanner(System.in);
 
-		// partieB(); // Bonus
+		System.out.println("Choose a mod:");
+		System.out.println("- Charm\t- CloSpan");
+		System.out.print("> ");
+
+		String s = sc.nextLine();
+		s = s.toLowerCase();
+
+		System.out.println("");
+		if (s.compareTo("charm") == 0) {
+			partieA();
+		} else if (s.compareTo("clospan") == 0) {
+			partieB();
+		} else {
+			System.out.println("Enter \"Charm\" or \"CloSpan\"");
+		}
+
+		sc.close();
 
 	}
 

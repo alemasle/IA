@@ -44,6 +44,7 @@ public class ParserPartie {
 			while (scan.hasNextLine()) { // File reading line per line
 				String line = scan.nextLine();
 				String[] lineComputed = line.split(" ");
+				String sub = lineComputed[1].substring(1);
 				int indicePartie = Integer.parseInt(lineComputed[0]);
 
 				if (joueur == 'B') {
@@ -62,21 +63,23 @@ public class ParserPartie {
 
 				if (joueur != lineComputed[1].charAt(0)) {
 					if (joueur == joueur1) {
+						bib.addCard(sub);
 						act1.add(a);
 					} else if (joueur == joueur2) {
+						bib.addCard(sub);
 						act2.add(a);
 					}
 					joueur = lineComputed[1].charAt(0);
 					a = new ActionsPlayer();
 				} else {
-					a.addAction(lineComputed[1].substring(1));
+					a.addAction(sub);
 				}
 			}
 
-			System.out.println("Size act1 : " + act1.size() + " Size act2 : " + act2.size());
 			PaireActions p = new PaireActions(act1, act2);
 			map.put(oldIndicePArtie, p);
-
+			
+			scan.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("\nScan error");
 			System.out.println(e.getMessage());
@@ -106,7 +109,8 @@ public class ParserPartie {
 				String[] lineComputed = line.split(" ");
 				int indicePartie = Integer.parseInt(lineComputed[0]);
 
-				if (oldIndicePArtie != indicePartie) { // If we change to a new party
+				if (oldIndicePArtie != indicePartie) { // If we change to a new
+														// party
 					PaireDecks decksPartie = new PaireDecks(newDeck1, newDeck2);
 					mapDeck.put(oldIndicePArtie, decksPartie);
 					oldIndicePArtie = indicePartie;
@@ -115,7 +119,9 @@ public class ParserPartie {
 				}
 
 				String sub = lineComputed[1].substring(1);
-				switch (lineComputed[1].charAt(0)) { // First letter define if the player was M or O, if B it's a new
+				switch (lineComputed[1].charAt(0)) { // First letter define if
+														// the player was M or
+														// O, if B it's a new
 														// party
 				case 'M':
 					bib.addCard(sub);

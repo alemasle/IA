@@ -35,7 +35,10 @@ public class Format {
 			File data = new File(fileData); // File raw data
 
 			ParserPartie pp = new ParserPartie(data);
-			Map<Integer, PaireDecks> map = pp.parseFileToDecks(); // Create the bibliodeck and the map
+			Map<Integer, PaireDecks> map = pp.parseFileToDecks(); // Create the
+																	// bibliodeck
+																	// and the
+																	// map
 			bib = pp.getBiblioDeck();
 
 			File dir = new File(inputFold);
@@ -54,7 +57,11 @@ public class Format {
 				System.out.println("Folder " + outputFold + " has been created.");
 			}
 
-			File input = new File("inputs/inputCharm-" + path); // File create to store input data ( raw data formated )
+			File input = new File("inputs/inputCharm-" + path); // File create
+																// to store
+																// input data (
+																// raw data
+																// formated )
 			FileWriter fw = new FileWriter(input); // Initialize
 
 			Worker worker = new Worker(bib);
@@ -64,7 +71,8 @@ public class Format {
 				Set<Integer> s1 = worker.deckToID(map.get(i).getFirst());
 				Set<Integer> s2 = worker.deckToID(map.get(i).getSecond());
 
-				fw.write(formatCharm(s1)); // We write the transactions in the inputfile
+				fw.write(formatCharm(s1)); // We write the transactions in the
+											// inputfile
 				fw.write(formatCharm(s2));
 
 			}
@@ -89,7 +97,9 @@ public class Format {
 		File data = new File(filename);
 
 		ParserPartie pp = new ParserPartie(data);
-		Map<Integer, PaireActions> map = pp.parseFileToSeq(); // Create the bibliodeck and the map
+		Map<Integer, PaireActions> map = pp.parseFileToSeq(); // Create the
+																// bibliodeck
+																// and the map
 		bib = pp.getBiblioDeck();
 
 		File dir = new File(inputFold);
@@ -108,17 +118,32 @@ public class Format {
 			System.out.println("Folder " + outputFold + " has been created.");
 		}
 
-		File input = new File("inputs/inputCloSpan-" + path); // File create to store input data ( raw data formated )
+		File input = new File("inputs/inputCloSpan-" + path); // File create to
+																// store input
+																// data ( raw
+																// data formated
+																// )
 		FileWriter fw = new FileWriter(input); // Initialize
 
 		Worker worker = new Worker(bib);
 
 		for (Integer i : map.keySet()) {
 
-			List<Set<Integer>> s1 = worker.sequencesToID(map.get(i).getFirst());
-			List<Set<Integer>> s2 = worker.sequencesToID(map.get(i).getSecond());
+			List<Set<Integer>> s1 = worker.sequencesToID(map.get(i).getFirst()); // All
+																					// the
+																					// actions
+																					// for
+																					// player
+																					// 1
+			List<Set<Integer>> s2 = worker.sequencesToID(map.get(i).getSecond()); // All
+																					// the
+																					// actions
+																					// for
+																					// player
+																					// 2
 
-			fw.write(formatCloSpan(s1)); // We write the list of sequences of actions in the inputfile
+			fw.write(formatCloSpan(s1)); // We write the list of sequences of
+											// actions in the inputfile
 			fw.write(formatCloSpan(s2));
 
 		}
@@ -152,8 +177,8 @@ public class Format {
 	 * 
 	 * @param line
 	 *            The line to format into an array
-	 * @return res An Array of Integer where the elements are cards ID and the last
-	 *         element is the support
+	 * @return res An Array of Integer where the elements are cards ID and the
+	 *         last element is the support
 	 */
 	private int[] formatOut(String line) {
 		String pars[] = line.split("#SUP:");
@@ -208,14 +233,14 @@ public class Format {
 				else
 					res += " -1 ";
 			}
-			res += "-2\n";
 		}
+		res += "-2\n";
 		return res;
 	}
 
 	/**
-	 * Select the file name in a path and change rawInput or rawOutput according to
-	 * the file path
+	 * Select the file name in a path and change rawInput or rawOutput according
+	 * to the file path
 	 * 
 	 * @param path
 	 * @return the file name
