@@ -72,12 +72,6 @@ public class Worker {
 				for (Integer i : bib.keySet()) {
 
 					if (bib.get(i).compareTo(card) == 0) {
-						if (i == 2) {
-							System.out.println("carte 2: " + bib.get(i));
-						}
-						if(i == 45){
-							System.out.println("carte 45: " + bib.get(i));
-						}
 						s.add(i);
 					}
 				}
