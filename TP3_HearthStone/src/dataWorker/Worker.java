@@ -51,10 +51,8 @@ public class Worker {
 				if (bibCard.compareTo(card) == 0) {
 					deckForSPMF.add(i);
 				}
-
 			}
 		}
-
 		return deckForSPMF;
 	}
 
