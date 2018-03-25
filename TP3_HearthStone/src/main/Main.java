@@ -125,11 +125,6 @@ public class Main {
 		System.out.println("Output file has been stored in \"outputs/\"\n");
 		// Function to read the output
 
-		List<int[]> lInt = f.fromOutput("outputs/outputCharm-" + f.getRawFile());
-
-		System.out.println(print(lInt));
-		System.out.println(printCards(lInt, f.getBib()));
-
 		sc.close();
 
 	}
