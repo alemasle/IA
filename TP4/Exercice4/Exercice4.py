@@ -8,7 +8,7 @@ digits.target[0]
 from matplotlib import pyplot as plt
 plt.gray()
 for i in range(10):
-    plt.matshow(digits.images[0])
+    plt.matshow(digits.images[i])
     plt.show()
 #to count the number of examples of a particular class, you can use:
 Y=digits.target
@@ -19,5 +19,5 @@ X = digits.data
 
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2),random_state=1)
 clf.fit(X, Y)
-predict = clf.predict(X)
+predict = clf.predict(digits.data[:10])
 print(predict)
