@@ -1,0 +1,32 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="my_board_nb_creatures <= 1.5\ngini = 0.495\nsamples = 1434\nvalue = [643, 791]"] ;
+1 [label="opponent_board_total_attack <= 4.5\ngini = 0.431\nsamples = 595\nvalue = [408, 187]"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="my_board_total_attack <= 1.5\ngini = 0.499\nsamples = 251\nvalue = [119, 132]"] ;
+1 -> 2 ;
+3 [label="gini = 0.47\nsamples = 114\nvalue = [71, 43]"] ;
+2 -> 3 ;
+4 [label="gini = 0.455\nsamples = 137\nvalue = [48, 89]"] ;
+2 -> 4 ;
+5 [label="opponent_board_nb_creatures <= 2.5\ngini = 0.269\nsamples = 344\nvalue = [289, 55]"] ;
+1 -> 5 ;
+6 [label="gini = 0.394\nsamples = 137\nvalue = [100, 37]"] ;
+5 -> 6 ;
+7 [label="gini = 0.159\nsamples = 207\nvalue = [189, 18]"] ;
+5 -> 7 ;
+8 [label="opponent_board_total_attack <= 2.5\ngini = 0.403\nsamples = 839\nvalue = [235, 604]"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="my_hand <= 0.5\ngini = 0.234\nsamples = 421\nvalue = [57, 364]"] ;
+8 -> 9 ;
+10 [label="gini = 0.355\nsamples = 13\nvalue = [10, 3]"] ;
+9 -> 10 ;
+11 [label="gini = 0.204\nsamples = 408\nvalue = [47, 361]"] ;
+9 -> 11 ;
+12 [label="my_health <= 21.5\ngini = 0.489\nsamples = 418\nvalue = [178, 240]"] ;
+8 -> 12 ;
+13 [label="gini = 0.484\nsamples = 187\nvalue = [110, 77]"] ;
+12 -> 13 ;
+14 [label="gini = 0.415\nsamples = 231\nvalue = [68, 163]"] ;
+12 -> 14 ;
+}

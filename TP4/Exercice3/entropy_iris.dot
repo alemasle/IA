@@ -1,0 +1,36 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="my_board_nb_creatures <= 1.5\nentropy = 0.992\nsamples = 2049\nvalue = [920, 1129]"] ;
+1 [label="opponent_board_total_attack <= 4.5\nentropy = 0.899\nsamples = 876\nvalue = [600, 276]"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+5 [label="entropy = 0.999\nsamples = 351\nvalue = [169, 182]"] ;
+1 -> 5 ;
+6 [label="entropy = 0.678\nsamples = 525\nvalue = [431, 94]"] ;
+1 -> 6 ;
+2 [label="opponent_board_total_health <= 1.5\nentropy = 0.845\nsamples = 1173\nvalue = [320, 853]"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3 [label="my_hand <= 0.5\nentropy = 0.467\nsamples = 463\nvalue = [46, 417]"] ;
+2 -> 3 ;
+15 [label="entropy = 0.764\nsamples = 9\nvalue = [7, 2]"] ;
+3 -> 15 ;
+16 [label="entropy = 0.423\nsamples = 454\nvalue = [39, 415]"] ;
+3 -> 16 ;
+4 [label="my_health <= 20.5\nentropy = 0.962\nsamples = 710\nvalue = [274, 436]"] ;
+2 -> 4 ;
+7 [label="my_board_total_attack <= 4.5\nentropy = 0.997\nsamples = 288\nvalue = [154, 134]"] ;
+4 -> 7 ;
+13 [label="entropy = 0.619\nsamples = 52\nvalue = [44, 8]"] ;
+7 -> 13 ;
+14 [label="entropy = 0.997\nsamples = 236\nvalue = [110, 126]"] ;
+7 -> 14 ;
+8 [label="me_playing <= 0.5\nentropy = 0.861\nsamples = 422\nvalue = [120, 302]"] ;
+4 -> 8 ;
+9 [label="entropy = 0.612\nsamples = 179\nvalue = [27, 152]"] ;
+8 -> 9 ;
+10 [label="opponent_board_total_attack <= 10.5\nentropy = 0.96\nsamples = 243\nvalue = [93, 150]"] ;
+8 -> 10 ;
+11 [label="entropy = 0.907\nsamples = 214\nvalue = [69, 145]"] ;
+10 -> 11 ;
+12 [label="entropy = 0.663\nsamples = 29\nvalue = [24, 5]"] ;
+10 -> 12 ;
+}
